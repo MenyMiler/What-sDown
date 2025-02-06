@@ -6,10 +6,10 @@ services:
     ports:
       - 27017:27017
 
-  feature:
+  users:
     build: .
     environment:
-      PORT: 8000
+      PORT: 7000
       MONGO_URI: mongodb://mongo
     ports:
-      - 8000:8000
+      - 7000:7000
