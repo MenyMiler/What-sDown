@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  mongo:
+    image: mongo:4.4.1
+    ports:
+      - 27017:27017
+
+  users:
+    build: .
+    environment:
+      PORT: 7000
+      MONGO_URI: mongodb://mongo
+    ports:
+      - 7000:7000
