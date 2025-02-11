@@ -1,13 +1,17 @@
 import { z } from 'zod';
 import { zodMongoObjectId } from '../../utils/zod.js';
 
-const requiredFields = z
+const mongoObjectId = z
     .object({
         _id: zodMongoObjectId,
     })
     .required();
 
-const optionalFields = z
+const genesisId = z.object({
+    genesisId: z.string(),
+})
+
+const statuslField = z
     .object({
         status: z.boolean(),
     })
@@ -21,15 +25,15 @@ export const getByQueryRequestSchema = z.object({
             step: z.coerce.number().min(0).default(0),
             limit: z.coerce.number().optional(),
         })
-        .merge(requiredFields.partial())
-        .merge(optionalFields),
+        .merge(mongoObjectId.partial())
+        .merge(statuslField),
     params: z.object({}),
 });
 
 // GET /api/users/count
 export const getCountRequestSchema = z.object({
     body: z.object({}),
-    query: optionalFields,
+    query: statuslField,
     params: z.object({}),
 });
 
@@ -42,16 +46,23 @@ export const getByIdRequestSchema = z.object({
     }),
 });
 
+// GET /api/users/:GenesisId
+export const getByGenesisIdRequestSchema = z.object({
+    body: z.object({}),
+    query: z.object({}),
+    params: genesisId.required(),
+});
+
 // POST /api/users
 export const createOneRequestSchema = z.object({
-    body: requiredFields.merge(optionalFields.required()),
+    body: statuslField.required().merge(genesisId.required()),
     query: z.object({}),
     params: z.object({}),
 });
 
 // PUT /api/users/:id
 export const updateOneRequestSchema = z.object({
-    body: requiredFields.partial().merge(optionalFields),
+    body: mongoObjectId.partial().merge(statuslField),
     query: z.object({}),
     params: z.object({
         id: zodMongoObjectId,

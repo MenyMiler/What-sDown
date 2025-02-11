@@ -8,6 +8,10 @@ const UsersSchema = new mongoose.Schema<UsersDocument>(
             type: Boolean,
             required: true,
         },
+        genesisId: {
+            type: String,
+            required: true,
+        },
     },
     {
         versionKey: false,

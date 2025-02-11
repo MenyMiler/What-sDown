@@ -25,6 +25,10 @@ export class UsersController {
         res.json(await UsersManager.getById(req.params.id));
     };
 
+    // static getGenesis = async (req: TypedRequest<typeof genesisId>, res: Response) => {
+    //     res.json(await UsersManager.getGenesis(req.query.status)); 
+    // };
+
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
         res.json(await UsersManager.createOne(req.body));
     };
