@@ -2,14 +2,17 @@ version: '3.4'
 
 services:
   mongo:
-    image: mongo:4.4.1
+    image: mongo
     ports:
       - 27017:27017
 
-  users:
+  backend:
     build: .
     environment:
-      PORT: 7000
-      MONGO_URI: mongodb://mongo
-    ports:
-      - 7000:7000
+      PORT: 8000
+      TOKEN_SECRET: secret
+      CALLBACK_URL: http://localhost/api/auth/callback
+      KARTOFFEL_BASE_URL: https://kartoffel.branch-yesodot.org
+      SHRAGA_URL: https://shraga.shraga.branch-yesodot.org
+      ACCESS_TOKEN_NAME: rabaz-access-token
+      SYSTEM_UNAVAILABLE_URL: /unavailable

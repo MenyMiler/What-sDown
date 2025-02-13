@@ -12,3 +12,5 @@ coverage/
 
 # Package lock
 package-lock.json
+
+npm_token_secret.txt
