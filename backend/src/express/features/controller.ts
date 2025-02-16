@@ -2,9 +2,15 @@ import { Response } from 'express';
 import { TypedRequest } from '../../utils/zod';
 import { FeaturesManager } from './manager';
 
-import { createOneRequestSchema, deleteOneRequestSchema, updateOneRequestSchema } from './validations';
+import { createOneRequestSchema, deleteOneRequestSchema, getByQueryRequestSchema, updateOneRequestSchema } from './validations';
 
 export class FeaturesController {
+
+    static async getByAll(req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) {
+        const { ...query } = req.query;
+
+        res.json(await FeaturesManager.getByQuery(query, req.user?.genesisId!));
+    }
 
     static async createOne(req: TypedRequest<typeof createOneRequestSchema>, res: Response) {
         res.json(await FeaturesManager.createOne(req.body));

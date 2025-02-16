@@ -3,6 +3,10 @@ import { UsersService } from '../users/service';
 import { FeaturesService } from './service';
 
 export class FeaturesManager {
+
+    static async getByQuery(query: Partial<Feature>, genesisId: string): Promise<Feature[]> {
+        return await FeaturesService.getByQuery(query, genesisId);
+    }
     
 
     static async createOne(feature: Partial<Feature> ): Promise<FeaturesService> {

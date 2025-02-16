@@ -21,20 +21,25 @@ export class UsersService {
     }
 
     static async checkIfUserExistsElseCreate(genesisId: string) {
-        console.log("checkIfUserExistsElseCreate");
+        // console.log("checkIfUserExistsElseCreate");
         let user;
         try {
             user = await UsersService.getByGenesisId(genesisId);
         } catch (error: any) {
-            return await UsersService.createOne({ genesisId });
+            return await UsersService.createOne( genesisId );
         }
-        if (!user) return await UsersService.createOne({ genesisId });
+        if (!user) return await UsersService.createOne( genesisId );
         return user;
     }
 
-    static async createOne({ genesisId }) {
+    static async createOne( genesisId: string)  {
+
+        //if personal by random
+        const personalNumber = Math.floor(Math.random() * 10);
+        const status = personalNumber % 2 === 0;
+        // console.log({personalNumber, status});
         
-        const { data } = await UsersService.api.post<UserDocument>(`/`, { genesisId, status: true });
+        const { data } = await UsersService.api.post<UserDocument>(`/`, { genesisId, status});
 
         return data;
     }

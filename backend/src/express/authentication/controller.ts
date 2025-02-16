@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { config } from '../../config';
 import { ShragaUser } from '../../utils/express/passport';
 import { AuthenticationManager } from './manager';
+import { UsersService } from '../users/service';
+import jwt from 'jsonwebtoken';
 
 const {
     service: { systemUnavailableURL },
@@ -13,10 +15,10 @@ export class AuthenticationController {
         console.log("createTokenAndRedirect");
         
 
-        console.log("req.user.RelayState", req.user?.RelayState);
-        console.log("req.query", req.query);
+        // console.log("req.user.RelayState", req.user?.RelayState);
+        // console.log("req.query", req.query);
         const { exp, iat, jti, RelayState, ...shragaUser } = req.user as ShragaUser;
-        console.log({RelayState});
+        // console.log({RelayState});
 
         const result = await AuthenticationManager.getUserToken(shragaUser);
 
@@ -26,7 +28,15 @@ export class AuthenticationController {
 
         // http://localhost:5000/api/auth/login?RelayState=/api/users
 
+        
         res.cookie(token, result);
+        //get the user from userService and add shing the token to the cookie
+        const user = await UsersService.getByGenesisId(shragaUser.genesisId);
+        if (user) {
+            console.log("2= ", {user});
+            const userToken = await jwt.sign({ ...user }, config.authentication.secret, { expiresIn: config.authentication.expiresIn, algorithm: 'HS256' }); 
+            res.cookie("userToken", userToken);
+        }
         return res.redirect(RelayState || '');
 
 

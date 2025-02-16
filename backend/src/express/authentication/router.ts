@@ -18,3 +18,4 @@ authenticationRouter.post(
     wrapController(AuthenticationController.createTokenAndRedirect),
 );
 
+    

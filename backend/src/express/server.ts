@@ -5,6 +5,8 @@ import session from 'express-session';
 import helmet from 'helmet';
 import http from 'http';
 import passport from 'passport';
+import cors from 'cors';
+
 
 import { config } from '../config';
 import { errorMiddleware } from '../utils/express/error';
@@ -30,6 +32,9 @@ export class Server {
         app.use(cookieParser());
 
         app.use(loggerMiddleware);
+
+        // ✅ הוספת CORS - פתרון הבעיה שלך
+        app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
         app.use(
             session({
