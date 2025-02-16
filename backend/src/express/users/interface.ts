@@ -1,7 +1,7 @@
 
 export interface User {
     genesisId: string;
-    isAdmin: Boolean;
+    status: Boolean;
 }
 export interface UserDocument extends User {
     _id: string;

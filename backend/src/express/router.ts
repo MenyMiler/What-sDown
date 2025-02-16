@@ -3,6 +3,7 @@ import passport from 'passport';
 import { config } from '../config';
 import { authenticationRouter } from './authentication/router';
 import { usersRouter } from './users/router';
+import { featuresRouter } from './features/router';
 
 export const appRouter = Router();
 
@@ -31,6 +32,8 @@ if (config.authentication.isRequired) {
 
 
 appRouter.use(config.users.baseRoute, usersRouter);
+
+appRouter.use(config.features.baseRoute, featuresRouter);
 
 
 appRouter.use('*', (_req, res) => res.status(404).send('Invalid Route'));

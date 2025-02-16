@@ -13,4 +13,29 @@ export class UsersService {
         const { data } = await UsersService.api.get<UserDocument>(`/${id}`);
         return data;
     }
+
+    static async getByGenesisId(genesisId: string) {
+        
+        const { data } = await UsersService.api.get<UserDocument>(`/genesisId/${genesisId}`);
+        return data;
+    }
+
+    static async checkIfUserExistsElseCreate(genesisId: string) {
+        console.log("checkIfUserExistsElseCreate");
+        let user;
+        try {
+            user = await UsersService.getByGenesisId(genesisId);
+        } catch (error: any) {
+            return await UsersService.createOne({ genesisId });
+        }
+        if (!user) return await UsersService.createOne({ genesisId });
+        return user;
+    }
+
+    static async createOne({ genesisId }) {
+        
+        const { data } = await UsersService.api.post<UserDocument>(`/`, { genesisId, status: true });
+
+        return data;
+    }
 }

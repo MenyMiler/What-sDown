@@ -19,10 +19,6 @@ export const config = {
         uri: env.get('USERS_SERVICE_URI').default('http://localhost:8000').asString(),
         baseRoute: env.get('USERS_BASE_ROUTE').default('/api/features').asString(),
     },
-    system: {
-        uri: env.get('SYSTEM_SERVICE_URI').default('http://localhost:8000').asString(),
-        baseRoute: env.get('SYSTEM_BASE_ROUTE').default('/api/system').asString(),
-    },
     authentication: {
         baseRoute: env.get('AUTHENTICATION_BASE_ROUTE').default('/api/auth').asString(),
         callbackURL: env.get('CALLBACK_URL').required().asString(),
