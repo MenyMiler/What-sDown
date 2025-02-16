@@ -10,6 +10,10 @@ export const wrapMiddleware = (func: (req: Request, res?: Response) => Promise<v
     };
 };
 
+
+
+
+
 export const wrapController = (func: (req: TypedRequest<AnyZodObject>, res: Response, next?: NextFunction) => Promise<void>) => {
     return (req: Request, res: Response, next: NextFunction) => {
         func(req, res, next).catch(next);
@@ -26,3 +30,5 @@ export const validateRequest = (schema: AnyZodObject) => {
         req.params = parsedParams;
     });
 };
+
+

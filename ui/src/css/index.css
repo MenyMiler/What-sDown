@@ -1,0 +1,8 @@
+body {
+    font-family: 'Assistant' sans-serif;
+}
+
+.genders-elements-border {
+    border-color: #1976d2 !important;
+    border-width: 2px !important;
+}

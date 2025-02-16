@@ -46,6 +46,15 @@ export const getByIdRequestSchema = z.object({
     }),
 });
 
+//GET /api/users/:genesisId
+export const getByGenesisGenesisIdRequestSchema = z.object({
+    body: z.object({}),
+    query: z.object({}),
+    params: z.object({
+        genesisId: z.string(),
+    }),
+})
+
 // GET /api/users/:GenesisId
 export const getByGenesisIdRequestSchema = z.object({
     body: z.object({}),

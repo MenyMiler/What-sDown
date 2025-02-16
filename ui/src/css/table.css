@@ -1,0 +1,34 @@
+.ag-theme-material .ag-rtl {
+    border-radius: 7px;
+}
+
+.ag-theme-material .ag-side-buttons {
+    padding-top: 0;
+}
+
+.ag-theme-material .ag-header-row {
+    font-size: 16px;
+}
+
+.ag-theme-material .ag-checkbox-input-wrapper.ag-checked::after {
+    color: #225aa7;
+}
+
+.ag-body-viewport,
+.ag-layout-normal,
+.ag-row-no-animation {
+    overflow: hidden !important;
+}
+
+.ag-theme-material .ag-checkbox-input-wrapper.ag-checked::after {
+    color: #225aa7;
+}
+
+.ag-horizontal-left-spacer {
+    visibility: hidden;
+}
+
+.ag-column-select-virtual-list-viewport {
+    overflow: auto;
+    padding: 0;
+}

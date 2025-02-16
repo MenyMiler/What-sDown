@@ -1,4 +1,4 @@
-import { NextFunction, Router } from 'express';
+import {  Router } from 'express';
 import passport from 'passport';
 import { config } from '../config';
 import { authenticationRouter } from './authentication/router';
@@ -13,10 +13,6 @@ appRouter.use(['/isAlive', '/isalive', '/health'], (_req, res) => res.status(200
 
 appRouter.use(config.authentication.baseRoute, authenticationRouter);
 
-
-appRouter.use('*', (_req, res,next:NextFunction) => {console.log(``,res.cookie);
-    next();
-});
 
 
 if (config.authentication.isRequired) {

@@ -1,0 +1,13 @@
+.squareWrapper {
+    cursor: pointer;
+    outline: none;
+}
+
+.squareBackground {
+    user-select: none;
+    opacity: 0.8;
+}
+
+.squareTop {
+    user-select: none;
+}

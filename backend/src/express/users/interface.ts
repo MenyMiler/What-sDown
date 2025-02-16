@@ -1,23 +1,10 @@
 
-
-
-
 export interface User {
-    status: boolean;
     genesisId: string;
+    isAdmin: Boolean;
 }
-
-export default interface createUserDTO {
-    genesisId: string;
-}
-
 export interface UserDocument extends User {
     _id: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
-
-
-
-
-// type PermissionByBase = Pick<User, 'genesisId'>;
-
-

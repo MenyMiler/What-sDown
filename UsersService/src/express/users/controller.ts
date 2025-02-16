@@ -4,6 +4,7 @@ import { UsersManager } from './manager.js';
 import {
     createOneRequestSchema,
     deleteOneRequestSchema,
+    getByGenesisGenesisIdRequestSchema,
     getByIdRequestSchema,
     getByQueryRequestSchema,
     getCountRequestSchema,
@@ -23,6 +24,10 @@ export class UsersController {
 
     static getById = async (req: TypedRequest<typeof getByIdRequestSchema>, res: Response) => {
         res.json(await UsersManager.getById(req.params.id));
+    };
+
+    static getByGenesisId = async (req: TypedRequest<typeof getByGenesisGenesisIdRequestSchema>, res: Response) => {
+        res.json(await UsersManager.getByGenesisId(req.params.genesisId));
     };
 
     // static getGenesis = async (req: TypedRequest<typeof genesisId>, res: Response) => {

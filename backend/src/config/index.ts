@@ -15,6 +15,10 @@ export const config = {
         uri: env.get('USERS_SERVICE_URI').default('http://localhost:6050').asString(),
         baseRoute: env.get('USERS_BASE_ROUTE').default('/api/users').asString(),
     },
+    features:{
+        uri: env.get('USERS_SERVICE_URI').default('http://localhost:8000').asString(),
+        baseRoute: env.get('USERS_BASE_ROUTE').default('/api/features').asString(),
+    },
     system: {
         uri: env.get('SYSTEM_SERVICE_URI').default('http://localhost:8000').asString(),
         baseRoute: env.get('SYSTEM_BASE_ROUTE').default('/api/system').asString(),

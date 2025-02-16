@@ -1,0 +1,36 @@
+.calendarBottomText {
+    text-anchor: middle;
+    fill: #333;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    font-weight: 550;
+    font-family: 'Assistant' serif-sans;
+}
+
+.calendarTopTick {
+    stroke: #e7e8ea;
+    stroke-width: 2px;
+}
+
+.calendarTopText {
+    text-anchor: middle;
+    fill: #555;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    font-weight: 550;
+    font-family: 'Assistant' serif-sans;
+}
+
+.calendarHeader {
+    fill: #ffffff;
+    stroke: #e7e8ea;
+    stroke-width: 2px;
+}

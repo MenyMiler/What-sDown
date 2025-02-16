@@ -4,6 +4,7 @@ import { UsersController } from './controller.js';
 import {
     createOneRequestSchema,
     deleteOneRequestSchema,
+    getByGenesisIdRequestSchema,
     getByIdRequestSchema,
     getByQueryRequestSchema,
     getCountRequestSchema,
@@ -17,6 +18,9 @@ usersRouter.get('/', validateRequest(getByQueryRequestSchema), wrapController(Us
 usersRouter.get('/count', validateRequest(getCountRequestSchema), wrapController(UsersController.getCount));
 
 usersRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController(UsersController.getById));
+
+//get by genesisId
+usersRouter.get('/genesisId/:genesisId', validateRequest(getByGenesisIdRequestSchema), wrapController(UsersController.getByGenesisId));
 
 usersRouter.post('/', validateRequest(createOneRequestSchema), wrapController(UsersController.createOne));
 

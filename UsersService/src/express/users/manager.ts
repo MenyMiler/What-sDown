@@ -17,6 +17,10 @@ export class UsersManager {
         return UsersModel.findById(userId).orFail(new DocumentNotFoundError(userId)).lean().exec();
     };
 
+    static getByGenesisId = async (genesisId: string): Promise<UsersDocument> => {
+        return UsersModel.findOne({ genesisId }).orFail(new DocumentNotFoundError(genesisId)).lean().exec();
+    };
+
     static createOne = async (user: Users): Promise<UsersDocument> => {
         return UsersModel.create(user);
     };

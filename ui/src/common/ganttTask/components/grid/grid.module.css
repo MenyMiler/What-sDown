@@ -1,0 +1,22 @@
+.gridRow {
+    fill: #fcfdff;
+}
+
+.gridRowGeneral {
+    fill: #fcfdff;
+    stroke: #e7e8ea;
+    stroke-width: 2px;
+}
+
+.gridRow:nth-child(even) {
+    fill: #fcfdff;
+}
+
+.gridRowLine {
+    stroke: #dedede;
+}
+
+.gridTick {
+    stroke: #e7e8ea;
+    stroke-width: 2px;
+}
