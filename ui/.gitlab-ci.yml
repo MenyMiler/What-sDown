@@ -1,4 +1,0 @@
-include:
-  - project: 'yesodot/rnd/s-team/fullplan/super-project'
-    ref: master
-    file: '/scripts/.gitlab-ci-template.yml'
