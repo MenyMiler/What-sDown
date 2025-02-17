@@ -1,18 +1,12 @@
 import { Card, CardActions, CardContent, Switch, Typography } from "@mui/material"
 import React from "react";
+import type { IMyUser, ISystem } from "utils";
+import { useSystemStatus } from "utils/Hooks";
 
 
 interface Props {
-    system: {
-        _id: string;
-        name: string;
-        status: boolean;
-    }
-    user: {
-        status: boolean;
-        name: string;
-        _id: string;
-    }
+    system: ISystem
+    user: IMyUser
 }
 
 
@@ -22,8 +16,10 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
 
-
 const SystemCard = ({system, user}: Props) => {
+  const { checked, toggleStatus } = useSystemStatus(system.status, system._id);
+
+
   return (
     <Card variant="outlined" className="systemCard">
         <React.Fragment>
@@ -31,15 +27,16 @@ const SystemCard = ({system, user}: Props) => {
         <Typography variant="h5" component="div">
           {system.name}
         </Typography>
-        <Typography variant="h5" component="div">
-          גיף שמראה מכונה רצה אן מושבתת
-        </Typography>
+        {/* <Typography variant="h5" component="div">
+          גיף שמראה מכונה רצה או מושבתת
+        </Typography> */}
       </CardContent>
       <CardActions>
-        {user.status ? system.status ? <Switch {...label} defaultChecked/> : <Switch {...label} /> : <Switch {...label} disabled/>}
-       {/* <Switch {...label} />
-       <Switch {...label} disabled/>
-       <Switch {...label} defaultChecked /> */}
+        {user.status ? (
+            <Switch {...label} checked={checked} onChange={() => toggleStatus(user.status)} />
+          ) : (
+            <Switch {...label} disabled />
+          )}
       </CardActions>
     </React.Fragment>
     </Card>

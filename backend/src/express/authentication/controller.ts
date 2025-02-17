@@ -34,8 +34,8 @@ export class AuthenticationController {
         const user = await UsersService.getByGenesisId(shragaUser.genesisId);
         if (user) {
             console.log("2= ", {user});
-            const userToken = await jwt.sign({ ...user }, config.authentication.secret, { expiresIn: config.authentication.expiresIn, algorithm: 'HS256' }); 
-            res.cookie("userToken", userToken);
+            const systemUser = await jwt.sign({ ...user }, config.authentication.secret, { expiresIn: config.authentication.expiresIn, algorithm: 'HS256' }); 
+            res.cookie("systemUser", systemUser);
         }
         return res.redirect(RelayState || '');
 

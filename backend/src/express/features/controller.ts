@@ -9,7 +9,7 @@ export class FeaturesController {
     static async getByAll(req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) {
         const { ...query } = req.query;
 
-        res.json(await FeaturesManager.getByQuery(query, req.user?.genesisId!));
+        res.json(await FeaturesManager.getByQuery(query));
     }
 
     static async createOne(req: TypedRequest<typeof createOneRequestSchema>, res: Response) {

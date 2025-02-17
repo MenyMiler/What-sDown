@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { config } from '../../config';
 import { Feature, FeatureDocument } from './interface';
-import { UsersService } from '../users/service';
 
 const {
     features: { uri, baseRoute },
@@ -10,10 +9,7 @@ const {
 export class FeaturesService {
     private static api = axios.create({ baseURL: `${uri}${baseRoute}`, timeout: service.requestTimeout});
 
-    static async getByQuery(query: Partial<Feature>, genesisId: string) {
-        //if user exist continue
-        const user = await UsersService.getByGenesisId(genesisId);
-        if(!user) return [];
+    static async getByQuery(query: Partial<Feature>) {
         const { data } = await FeaturesService.api.get<FeatureDocument[]>(`/`, { params: { query } });
         return data;
     }
