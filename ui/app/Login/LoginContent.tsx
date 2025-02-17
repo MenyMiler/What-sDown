@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router";
+
 
 const LoginContent = () => { 
-
+  
     useEffect(() => { 
         //navigate to login
-        window.location.href = `http://localhost:5000/api/auth/login?RelayState=http://localhost:5173/home`;
+        const port = window.location.port;
+        if (!port) return;
+        window.location.href = `http://localhost:5000/api/auth/login?RelayState=http://localhost:${port}/home`;
       }, [])
 
   

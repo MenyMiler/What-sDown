@@ -3,19 +3,20 @@ import { jwtDecode } from "jwt-decode";
 import { getCookie, type IShragaUser, type ISystem } from "utils";
 import axios from "axios";
 
-
 const api = axios.create({
-    baseURL: "http://localhost:5000",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  });
-
-
+  baseURL: "http://localhost:5000",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
 
 export function useSystemUser() {
-  const [systemUser, setSystemUser] = useState<{ _id: string; status: boolean; genesisId: string } | null>(null);
+  const [systemUser, setSystemUser] = useState<{
+    _id: string;
+    status: boolean;
+    genesisId: string;
+  } | null>(null);
 
   useEffect(() => {
     const getSystemUser = getCookie("systemUser");
@@ -30,8 +31,6 @@ export function useSystemUser() {
   return systemUser;
 }
 
-
-
 export function useShragaUser() {
   const [shragaUser, setShragaUser] = useState<IShragaUser | null>(null);
   useEffect(() => {
@@ -45,14 +44,13 @@ export function useShragaUser() {
   return shragaUser;
 }
 
-
-
-export function useSystems(systemUser: { _id: string; status: boolean; genesisId: string } | null) {
+export function useSystems(
+  systemUser: { _id: string; status: boolean; genesisId: string } | null
+) {
   const [allSystems, setAllSystems] = useState<ISystem[]>([]);
 
   useEffect(() => {
     if (systemUser) {
-
       const getSystems = async () => {
         try {
           const response = await api.get("/api/features");
@@ -67,22 +65,26 @@ export function useSystems(systemUser: { _id: string; status: boolean; genesisId
     }
   }, [systemUser]);
 
-
-  return allSystems;
+  return [allSystems, setAllSystems] as const;
 }
 
-
-export function useSystemStatus(initialStatus: boolean, systemId: string) {
+export function useSystemStatus(
+  initialStatus: boolean,
+  systemId: string,
+  isAdmin: boolean
+) {
   const [checked, setChecked] = useState(initialStatus);
 
-  const toggleStatus = (isUserAllowed: boolean) => {
-    if (!isUserAllowed) return;
+  const toggleStatus = () => {
+    if (!isAdmin) return;
     setChecked((prev) => !prev);
   };
 
   useEffect(() => {
-    console.log({ checked });
-    api.put(`/api/features/${systemId}`, { status: checked }).catch(console.error);
+    if (!isAdmin) return;
+    api
+      .put(`/api/features/${systemId}`, { status: checked })
+      .catch(console.error);
   }, [checked, systemId]);
 
   return { checked, toggleStatus };

@@ -13,7 +13,7 @@ export class FeaturesController {
     }
 
     static async createOne(req: TypedRequest<typeof createOneRequestSchema>, res: Response) {
-        res.json(await FeaturesManager.createOne(req.body));
+        res.json(await FeaturesManager.createOne(req.body, req.user?.genesisId!));
     }
 
     static async updateOne(req: TypedRequest<typeof updateOneRequestSchema>, res: Response) {
@@ -21,6 +21,6 @@ export class FeaturesController {
     }
 
     static async deleteOne(req: TypedRequest<typeof deleteOneRequestSchema>, res: Response) {
-        res.json(await FeaturesManager.deleteOne(req.params.id));
+        res.json(await FeaturesManager.deleteOne(req.params.id, req.user?.genesisId!));
     }
 }
