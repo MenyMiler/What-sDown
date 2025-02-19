@@ -7,7 +7,12 @@ const LoginContent = () => {
         //navigate to login
         const port = window.location.port;
         if (!port) return;
-        window.location.href = `http://localhost:5000/api/auth/login?RelayState=http://localhost:${port}/home`;
+        // window.location.href = `http://localhost:5000/api/auth/login?RelayState=http://localhost:${port}/home`;
+        // window.location.href = `http://backend/api/auth/login?RelayState=http://ui/home`;
+        // window.location.href = `http://localhost:5000/api/auth/login?RelayState=${window.location.origin}:3000/home`;
+        window.location.href = `http://localhost:5000/api/auth/login?RelayState=localhost:3000/home`;
+
+
       }, [])
 
   

@@ -16,13 +16,22 @@ export function HomeContent() {
     null
   );
 
+  // useEffect(() => {
+  //   const port = window.location.port;
+  //   if (!port) return;
+  //   setLoginUrl(
+  //     `http://localhost:5000/api/auth/login?RelayState=http://localhost:${port}/home`
+  //   );
+  // }, []);
+  
   useEffect(() => {
     const port = window.location.port;
     if (!port) return;
     setLoginUrl(
-      `http://localhost:5000/api/auth/login?RelayState=http://localhost:${port}/home`
+      `http://localhost:5000/api/auth/login?RelayState=http://localhost:3000/home`
     );
   }, []);
+  
 
   // פונקציה למחיקת מערכת
   const handleDeleteSystem = async (systemId: string, systemName: string) => {

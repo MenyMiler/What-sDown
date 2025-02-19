@@ -31,7 +31,12 @@ if (config.authentication.isRequired) {
 
 
 
-appRouter.use(config.users.baseRoute, usersRouter);
+// appRouter.use(config.users.baseRoute, usersRouter);
+
+appRouter.use(config.users.baseRoute, (_req, _res, next) => {
+    console.log('Entering users route');
+    next();
+}, usersRouter);
 
 appRouter.use(config.features.baseRoute, featuresRouter);
 

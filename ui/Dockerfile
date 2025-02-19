@@ -23,33 +23,23 @@
 
 
 
-# השתמש בתמונה של Node.js
+# שלב 1 - בניית ה-UI
 FROM node:20-alpine
-
-# הגדר את העבודה בתוך תיקיית /app
 WORKDIR /app
-
-# העתקת קבצי package.json ו-package-lock.json
 COPY package.json package-lock.json ./
-
-# התקן את התלויות
 RUN npm install
-
-# העתקת קבצי תצורה נוספים
-COPY tsconfig.json ./
-COPY vite.config.ts ./
-
-# העתקת הקוד והקבצים הציבוריים
 COPY . .
-
-# בנה את הפרויקט
 RUN npm run build
 
-# חשוף את הפורט שבו יפעל השרת (למשל 5173)
-EXPOSE 5173
 
-# הרץ את השרת
+EXPOSE 3000
 CMD ["npm", "run", "dev"]
+
+
+
+
+
+
 
 
 

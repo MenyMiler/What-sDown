@@ -6,7 +6,9 @@ export const config = {
         port: env.get('PORT').default(6050).required().asPortNumber(),
     },
     mongo: {
-        uri: env.get('MONGO_URI').default('mongodb://localhost').required().asString(),
+        // uri: env.get('MONGO_URI').default('mongodb://localhost').required().asString(),
+        uri: env.get('MONGO_URI').default('mongodb://mongodb').required().asString(),
+
         UsersCollectionName: env.get('USERS_COLLECTION_NAME').default('users').required().asString(),
     },
 };
