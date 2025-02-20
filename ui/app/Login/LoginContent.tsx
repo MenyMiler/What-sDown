@@ -16,7 +16,8 @@ const LoginContent = () => {
     //   }, [])
 
     useEffect(() => { 
-      window.location.replace(`/api/auth/login?RelayState=/home`);
+      window.location.replace(`http://localhost:80/api/auth/login?RelayState=http://localhost:80/home`);
+      // window.location.replace(`/api/auth/login?RelayState=http://${window.location.hostname}/home`);
   }, [])
 
   

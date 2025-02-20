@@ -25,7 +25,6 @@ export class Server {
     static createExpressApp() {
         const app = express();
 
-
         app.use(helmet());
         app.use(express.json({ limit: config.service.maxFileSize }));
         app.use(express.urlencoded({ extended: true, limit: config.service.maxFileSize }));
@@ -33,19 +32,36 @@ export class Server {
 
         app.use(loggerMiddleware);
 
-        // ✅ הוספת CORS - פתרון הבעיה שלך
-        // app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
-
-        app.use(cors({ 
-            origin: 'http://localhost:3000', 
-            credentials: true 
-        }));
-
-        // app.use(cors({ 
-        //     origin: 'http://my-nginx', 
-        //     credentials: true 
+        // app.use(cors({
+        //     origin: 'http://localhost:80',
+        //     credentials: true
         // }));
-        
+
+        app.use(
+            cors({
+                origin: 'http://localhost',
+                credentials: true,
+            }),
+        );
+
+        // const allowedOrigins = [
+        //     'http://localhost:3000',
+        //     'http://localhost', // הוסף את זה
+        // ];
+
+        // app.use(
+        //     cors({
+        //         origin: (origin, callback) => {
+        //             // אפשר בקשות ללא Origin (כגון מ-Postman)
+        //             if (!origin) return callback(null, true);
+        //             if (allowedOrigins.includes(origin)) {
+        //                 return callback(null, true);
+        //             }
+        //             return callback(new Error('Not allowed by CORS'));
+        //         },
+        //         credentials: true,
+        //     }),
+        // );
 
         app.use(
             session({
@@ -67,9 +83,7 @@ export class Server {
     }
 
     async start() {
-        this.http = this.app.listen(this.port, "0.0.0.0");
+        this.http = this.app.listen(this.port, '0.0.0.0');
         await once(this.http, 'listening');
     }
 }
-
-

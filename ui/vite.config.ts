@@ -10,8 +10,8 @@ export default defineConfig({
     // port: 3000, 
     port: 3000,
     host: true,
-    hmr: {
-        port: 4000,
-    },
+    // hmr: {
+    //     port: 4000,
+    // },
   },
 });

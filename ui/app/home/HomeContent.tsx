@@ -28,7 +28,7 @@ export function HomeContent() {
     const port = window.location.port;
     if (!port) return;
     setLoginUrl(
-      `http://localhost:5000/api/auth/login?RelayState=http://localhost:3000/home`
+      `http://localhost:80/api/auth/login?RelayState=http://localhost:80/home`
     );
   }, []);
   
