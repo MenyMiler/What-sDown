@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { TypedRequest } from '../../utils/zod.js';
 import { FeaturesManager } from './manager.js';
 import {
+    createManyRequestSchema,
     createOneRequestSchema,
     deleteOneRequestSchema,
     getByIdRequestSchema,
@@ -27,6 +28,10 @@ export class FeaturesController {
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
         res.json(await FeaturesManager.createOne(req.body));
+    };
+
+    static createMany = async (req: TypedRequest<typeof createManyRequestSchema>, res: Response) => {
+        res.json(await FeaturesManager.createMany(req.body));
     };
 
     static updateOne = async (req: TypedRequest<typeof updateOneRequestSchema>, res: Response) => {

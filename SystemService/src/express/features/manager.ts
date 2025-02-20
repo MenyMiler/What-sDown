@@ -21,6 +21,10 @@ export class FeaturesManager {
         return FeaturesModel.create(feature);
     };
 
+    static createMany = async (features: Feature[]): Promise<FeatureDocument[]> => {
+        return FeaturesModel.insertMany(features);
+    };
+
     static updateOne = async (featureId: string, update: Partial<Feature>): Promise<FeatureDocument> => {
         return FeaturesModel.findByIdAndUpdate(featureId, update, { new: true }).orFail(new DocumentNotFoundError(featureId)).lean().exec();
     };

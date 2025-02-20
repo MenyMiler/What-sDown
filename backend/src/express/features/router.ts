@@ -4,6 +4,7 @@ import { config } from '../../config';
 import { validateRequest, wrapController } from '../../utils/express/wrappers';
 import { createOneRequestSchema, deleteOneRequestSchema, getByQueryRequestSchema, updateOneRequestSchema } from './validations';
 import { FeaturesController } from './controller';
+// import { seed } from '../../utils/seed';
 
 
 const {
@@ -13,6 +14,8 @@ const {
 
 export const featuresRouter = Router();
 
+// //to call the seed function
+// seed();
 
 featuresRouter.get('/', createProxyMiddleware({ target: uri, onProxyReq: fixRequestBody, proxyTimeout: service.requestTimeout }), 
 validateRequest(getByQueryRequestSchema), wrapController(FeaturesController.getByAll));

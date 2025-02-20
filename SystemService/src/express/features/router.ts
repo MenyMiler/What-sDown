@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { validateRequest, wrapController } from '../../utils/express/wrappers.js';
 import { FeaturesController } from './controller.js';
 import {
+    createManyRequestSchema,
     createOneRequestSchema,
     deleteOneRequestSchema,
     getByIdRequestSchema,
@@ -19,6 +20,9 @@ featuresRouter.get('/count', validateRequest(getCountRequestSchema), wrapControl
 featuresRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController(FeaturesController.getById));
 
 featuresRouter.post('/', validateRequest(createOneRequestSchema), wrapController(FeaturesController.createOne));
+
+//create meny
+featuresRouter.post('/', validateRequest(createManyRequestSchema), wrapController(FeaturesController.createMany));
 
 featuresRouter.put('/:id', validateRequest(updateOneRequestSchema), wrapController(FeaturesController.updateOne));
 

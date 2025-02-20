@@ -19,6 +19,12 @@ export class FeaturesService {
         return data;
     }
 
+    //create meny
+    static async createMany(features: Partial<Feature>[]) {
+        const { data } = await FeaturesService.api.post<FeatureDocument[]>(`/`,features);
+        return data;
+    }
+
     static async updateOne(systemId: string, update: Partial<Feature>) {
         const { data } = await FeaturesService.api.put<FeatureDocument>(`/${systemId}`, update);
         return data;
@@ -28,4 +34,5 @@ export class FeaturesService {
         const { data } = await FeaturesService.api.delete<FeatureDocument>(`/${featureId}`);
         return data;
     }
+
 }

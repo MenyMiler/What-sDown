@@ -32,36 +32,12 @@ export class Server {
 
         app.use(loggerMiddleware);
 
-        // app.use(cors({
-        //     origin: 'http://localhost:80',
-        //     credentials: true
-        // }));
-
         app.use(
             cors({
                 origin: 'http://localhost',
                 credentials: true,
             }),
         );
-
-        // const allowedOrigins = [
-        //     'http://localhost:3000',
-        //     'http://localhost', // הוסף את זה
-        // ];
-
-        // app.use(
-        //     cors({
-        //         origin: (origin, callback) => {
-        //             // אפשר בקשות ללא Origin (כגון מ-Postman)
-        //             if (!origin) return callback(null, true);
-        //             if (allowedOrigins.includes(origin)) {
-        //                 return callback(null, true);
-        //             }
-        //             return callback(new Error('Not allowed by CORS'));
-        //         },
-        //         credentials: true,
-        //     }),
-        // );
 
         app.use(
             session({

@@ -49,6 +49,13 @@ export const createOneRequestSchema = z.object({
     params: z.object({}),
 });
 
+// POST /api/features
+export const createManyRequestSchema = z.object({
+    body: z.array(requiredFields.merge(optionalFields.required())),
+    query: z.object({}),
+    params: z.object({}),
+});
+
 // PUT /api/features/:id
 export const updateOneRequestSchema = z.object({
     body: requiredFields.partial().merge(optionalFields),
