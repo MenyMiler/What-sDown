@@ -2,42 +2,33 @@ import { useEffect, useState } from "react";
 import SystemCard from "./SystemCard";
 import { useShragaUser, useSystems, useSystemUser } from "utils/Hooks";
 import { deleteSystem, getAllSystems } from "utils";
-import CustomPrompt from "~/CustomPrompt/CustomPrompt";
-
-// http://localhost:5000/api/auth/login?RelayState=http://localhost:5173/home
+import { HomeCard, HomeCenter, HomeNav } from "./styled";
 
 export function HomeContent() {
   const systemUser = useSystemUser();
   const shragaUser = useShragaUser();
   const [allSystems, setAllSystems] = useSystems(systemUser);
-  const [loginUrl, setLoginUrl] = useState("");
-  const [isPromptOpen, setIsPromptOpen] = useState(false);
-  const [deletedSystemName, setDeletedSystemName] = useState<string | null>(
-    null
-  );
 
   
   useEffect(() => {
-    setLoginUrl(
-      `http://localhost:80/api/auth/login?RelayState=http://localhost:80/home`
-    );
-  }, []);
+    if(systemUser){
+      console.log({systemUser});
+    }
+  }, [systemUser]);
   
 
-  // פונקציה למחיקת מערכת
   const handleDeleteSystem = async (systemId: string, systemName: string) => {
-    await deleteSystem(systemId, systemUser?.status!);
+    const res = await deleteSystem(systemId, systemUser?.status!);
     const allSys = await getAllSystems();
     setAllSystems(allSys);
-    setDeletedSystemName(systemName);
-    setIsPromptOpen(true);
+    if(res.status === 200) alert(`${systemName} deleted`);
   };
 
   if (!systemUser || !shragaUser) {
     return (
       <div className="home">
         <div className="center">
-          <a href={loginUrl}>היי עליך להתחבר</a>
+          <a href={"http://localhost:80/api/auth/login?RelayState=http://localhost:80/home"}>היי עליך להתחבר</a>
         </div>
       </div>
     );
@@ -55,17 +46,16 @@ export function HomeContent() {
 
   return (
     <>
-      <CustomPrompt
-        Component={() => <>{deletedSystemName} deleted</>}
-        isVisible={isPromptOpen}
-        onClose={() => setIsPromptOpen(false)}
-      />
-      <div className="home">
-        <h1>
+      <HomeCard>
+        <HomeNav>
+          <button>log out</button>
+          <button>create system</button>
+        </HomeNav>
+      <h1>
           Hello {shragaUser.name.firstName} {shragaUser.name.lastName}
         </h1>
-        <div className="center">
-          {allSystems.map(
+        <HomeCenter>
+        {allSystems.map(
             (system: { _id: string; name: string; status: boolean }) => (
               <div key={system._id}>
                 <SystemCard
@@ -79,8 +69,8 @@ export function HomeContent() {
               </div>
             )
           )}
-        </div>
-      </div>
+        </HomeCenter>
+      </HomeCard>
     </>
   );
 }

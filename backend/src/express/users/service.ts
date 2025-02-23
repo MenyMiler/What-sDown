@@ -33,12 +33,12 @@ export class UsersService {
     }
 
     static async createOne( genesisId: string)  {
-
-        //if personal by random
-        const personalNumber = Math.floor(Math.random() * 10);
-        const status = personalNumber % 2 === 0;
-        // console.log({personalNumber, status});
-        
+        // //if personal by random
+        // const personalNumber = Math.floor(Math.random() * 10);
+        // const status = personalNumber % 2 === 0;
+        // // console.log({personalNumber, status});
+        let status;
+        genesisId == "5e5688324203fc40043591aa" ? (status = true) : (status = false);
         const { data } = await UsersService.api.post<UserDocument>(`/`, { genesisId, status});
 
         return data;

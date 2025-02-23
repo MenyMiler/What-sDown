@@ -5,8 +5,6 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
-  // baseURL: "http://backend:5000",
-  // baseURL: "http://my-nginx/api",
 
   headers: {
     "Content-Type": "application/json",
@@ -50,7 +48,17 @@ export function useShragaUser() {
 export function useSystems(
   systemUser: { _id: string; status: boolean; genesisId: string } | null
 ) {
+//   const [allSystems, setAllSystems] = useState<ISystem[]>([
+//     {
+//         "_id": "67bb20df6f985ca9d3369360",
+//         "name": "18 feature",
+//         "status": true
+//     }
+// ]);
+
   const [allSystems, setAllSystems] = useState<ISystem[]>([]);
+
+
 
   useEffect(() => {
     if (systemUser) {
