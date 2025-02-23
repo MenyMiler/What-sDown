@@ -19,7 +19,6 @@ usersRouter.get('/count', validateRequest(getCountRequestSchema), wrapController
 
 usersRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController(UsersController.getById));
 
-//get by genesisId
 usersRouter.get('/genesisId/:genesisId', validateRequest(getByGenesisIdRequestSchema), wrapController(UsersController.getByGenesisId));
 
 usersRouter.post('/', validateRequest(createOneRequestSchema), wrapController(UsersController.createOne));
