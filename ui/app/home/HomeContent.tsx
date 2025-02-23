@@ -16,17 +16,8 @@ export function HomeContent() {
     null
   );
 
-  // useEffect(() => {
-  //   const port = window.location.port;
-  //   if (!port) return;
-  //   setLoginUrl(
-  //     `http://localhost:5000/api/auth/login?RelayState=http://localhost:${port}/home`
-  //   );
-  // }, []);
   
   useEffect(() => {
-    const port = window.location.port;
-    if (!port) return;
     setLoginUrl(
       `http://localhost:80/api/auth/login?RelayState=http://localhost:80/home`
     );
