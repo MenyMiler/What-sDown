@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import type { IMyUser, ISystem } from "utils";
 import {  useSystemStatus } from "utils/Hooks";
-import CustomPrompt from "~/CustomPrompt/CustomPrompt";
+
 
 interface Props {
   system: ISystem;
