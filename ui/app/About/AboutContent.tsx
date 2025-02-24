@@ -1,4 +1,3 @@
-// ../about/aboutContent.tsx
 export function AboutContent() {
     return (
       <div>

@@ -6,12 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   server: {
-    // host: '0.0.0.0', // מאפשר חשיפה לרשת
-    // port: 3000, 
     port: 3000,
     host: true,
-    // hmr: {
-    //     port: 4000,
-    // },
   },
 });

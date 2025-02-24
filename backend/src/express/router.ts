@@ -20,7 +20,6 @@ if (config.authentication.isRequired) {
     appRouter.use(passport.authenticate('jwt', { session: false }));
 } else {
     appRouter.use((req, _res, next) => {
-        console.log(18)
         if (!req.user) req.user = {} as any;
         req.user!.id = config.authentication.mockAuthenticatedUserId;
         next();
@@ -31,12 +30,9 @@ if (config.authentication.isRequired) {
 
 
 
-// appRouter.use(config.users.baseRoute, usersRouter);
+appRouter.use(config.users.baseRoute, usersRouter);
 
-appRouter.use(config.users.baseRoute, (_req, _res, next) => {
-    console.log('Entering users route');
-    next();
-}, usersRouter);
+
 
 appRouter.use(config.features.baseRoute, featuresRouter);
 

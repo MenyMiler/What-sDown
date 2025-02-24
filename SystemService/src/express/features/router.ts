@@ -21,7 +21,6 @@ featuresRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController
 
 featuresRouter.post('/', validateRequest(createOneRequestSchema), wrapController(FeaturesController.createOne));
 
-//create meny
 featuresRouter.post('/', validateRequest(createManyRequestSchema), wrapController(FeaturesController.createMany));
 
 featuresRouter.put('/:id', validateRequest(updateOneRequestSchema), wrapController(FeaturesController.updateOne));

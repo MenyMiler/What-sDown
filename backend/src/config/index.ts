@@ -12,7 +12,6 @@ export const config = {
         paginationMinPageSize: env.get('PAGINATION_MIN_PAGE_SIZE').default(1).asInt(),
     },
     users: {
-        // uri: env.get('USERS_SERVICE_URI').default('http://localhost:6050').asString(),
         uri: env.get('USERS_SERVICE_URI').default('http://userservice:6050').asString(),
         baseRoute: env.get('USERS_BASE_ROUTE').default('/api/users').asString(),
     },
