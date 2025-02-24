@@ -45,9 +45,6 @@ export interface IMyUser {
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
-  // baseURL: "http://backend:5000",
-  // baseURL: "http://my-nginx/api",
-
 
   headers: {
     "Content-Type": "application/json",

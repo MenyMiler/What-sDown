@@ -2,6 +2,7 @@ import { Card } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 
+
 export const CustomPrompt = styled("div")(() => ({
 
 }));
@@ -22,9 +23,11 @@ export const HomeNav = styled("div")(() => ({
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
-  backgroundColor: "gray",
+  backgroundColor: "#DBDBDB",
 }))
 
+
+// i whant that we will not sea the scroll
 
 export const HomeCenter = styled("div")(() => ({
     width: "80%",
@@ -36,7 +39,15 @@ export const HomeCenter = styled("div")(() => ({
     alignItems: "center",
     flexWrap: "wrap",
     gap: "30px",
+    overflowY: "scroll",
+    paddingTop: "3px",
+    paddingBottom: "3px",
+    "&::-webkit-scrollbar": {
+      display: "none", 
+    },
 }));
+
+
 
 
 export const CardWrapper = styled(Card)(() => ({
@@ -51,6 +62,9 @@ export const TrashIcon = styled("svg")(() => ({
   height: "16px",
   fill: "currentColor",
 }));
+
+
+export const StyledYesodotIcon = styled("img")({ position: 'absolute', right: 0, height: '3rem', width: '3rem' });
 
 
 
