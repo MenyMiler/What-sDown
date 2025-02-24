@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="18.501" viewBox="0 0 20.281 18.501">
+  <g id="Group_783" data-name="Group 783" transform="translate(-1980.719 -518.535)">
+    <path id="Icon_material-school" data-name="Icon material-school" d="M4.731,12.724v3.231l5.655,3.086,5.655-3.086V12.724L10.386,15.81ZM10.386,4.5,1.5,9.347l8.886,4.847,7.27-3.967V15.81h1.616V9.347Z" transform="translate(1981.728 517.994)" fill="#757575"/>
+    <g id="Group_776" data-name="Group 776" transform="translate(1979.152 517.138)">
+      <path id="Icon_awesome-plus" data-name="Icon awesome-plus" d="M9.751,6.375H6.376V3a.75.75,0,0,0-.75-.75h-.75a.75.75,0,0,0-.75.75V6.375H.75a.75.75,0,0,0-.75.75v.75a.75.75,0,0,0,.75.75H4.125V12a.75.75,0,0,0,.75.75h.75a.75.75,0,0,0,.75-.75V8.625H9.751a.75.75,0,0,0,.75-.75v-.75A.75.75,0,0,0,9.751,6.375Z" transform="translate(2.067 -0.353)" fill="#fff" stroke="#757575" stroke-width="1"/>
+    </g>
+  </g>
+</svg>
