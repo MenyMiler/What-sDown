@@ -6,6 +6,7 @@ import { HomeCard, HomeCenter, HomeNav } from "./styled";
 import { AuthService } from "services/authService";
 import { environment } from "../../utils/enve_";
 
+
 export function HomeContent() {
   const systemUser = useSystemUser();
   const shragaUser = useShragaUser();
@@ -21,8 +22,10 @@ export function HomeContent() {
     const res = await deleteSystem(systemId, systemUser?.status!);
     const allSys = await getAllSystems();
     setAllSystems(allSys);
-    if (res.status) alert(`המערכת ${systemName} נמחקה בהצלחה`);
+    if (res?.status) alert(`המערכת ${systemName} נמחקה בהצלחה`);
   };
+
+  
 
   if (!systemUser || !shragaUser) {
     return (

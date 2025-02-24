@@ -17,7 +17,6 @@ export class FeaturesManager {
 
     static async updateOne(featureId: string, update: Partial<Feature>, genesisId: string): Promise<FeaturesService> {
         const user = await UsersService.getByGenesisId(genesisId);
-        // console.log({ user });
         if (user.status) {
             return await FeaturesService.updateOne(featureId, update);
         }
@@ -27,7 +26,6 @@ export class FeaturesManager {
 
     static async deleteOne(featureId: string, genesisId: string): Promise<FeaturesService> {
         const user = await UsersService.getByGenesisId(genesisId);
-        console.log({ user });
         if (user.status) {
             return await FeaturesService.deleteOne(featureId);
         }

@@ -1,7 +1,6 @@
 import { environment } from "../utils/enve_";
 import cookies from "js-cookie";
 import { jwtDecode } from 'jwt-decode';
-// import globals from "globals";
 
 export class AuthService {
 //   static getUser = (): UserState['user'] | null => {

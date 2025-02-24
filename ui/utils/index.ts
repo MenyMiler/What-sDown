@@ -57,7 +57,7 @@ export async function deleteSystem(systemId: string, isAdmin: boolean)  {
   if (!isAdmin || !systemId) return;
   try {
     const response = await api.delete(`/api/features/${systemId}`);
-    return response.data;
+    return response;
   } catch (err) {
     console.error(err);
   }

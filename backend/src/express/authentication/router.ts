@@ -5,7 +5,6 @@ import { AuthenticationController } from './controller';
 
 export const authenticationRouter = Router();
 
-// authenticationRouter.use('/', passport.authenticate('shraga', { failureRedirect: '/unauthorized' }));
 
 
 authenticationRouter.get('/login', passport.authenticate('shraga', { failureRedirect: '/unauthorized' }));

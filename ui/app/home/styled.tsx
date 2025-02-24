@@ -27,7 +27,6 @@ export const HomeNav = styled("div")(() => ({
 }))
 
 
-// i whant that we will not sea the scroll
 
 export const HomeCenter = styled("div")(() => ({
     width: "80%",

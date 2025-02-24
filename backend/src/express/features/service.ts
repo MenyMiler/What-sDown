@@ -19,7 +19,6 @@ export class FeaturesService {
         return data;
     }
 
-    //create meny
     static async createMany(features: Partial<Feature>[]) {
         const { data } = await FeaturesService.api.post<FeatureDocument[]>(`/`,features);
         return data;
