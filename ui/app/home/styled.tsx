@@ -49,6 +49,7 @@ export const HomeCenter = styled("div")(() => ({
 
 
 
+
 export const CardWrapper = styled(Card)(() => ({
   width: "300px",
   maxWidth: "80%",

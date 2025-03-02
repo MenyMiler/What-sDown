@@ -14,12 +14,14 @@
     "@mui/material": "^7.0.0-alpha.1",
     "@react-router/node": "^7.1.5",
     "@react-router/serve": "^7.1.5",
+    "@types/toastify-js": "^1.12.3",
     "axios": "^1.7.9",
     "isbot": "^5.1.17",
     "jwt-decode": "^4.0.0",
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
-    "react-router": "^7.1.5"
+    "react-router": "^7.1.5",
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "@react-router/dev": "^7.1.5",

@@ -4,7 +4,7 @@ import { useShragaUser, useSystems, useSystemUser } from "utils/Hooks";
 import { deleteSystem, getAllSystems } from "utils";
 import { HomeCard, HomeCenter, HomeNav } from "./styled";
 import { AuthService } from "services/authService";
-import { environment } from "../../utils/enve_";
+import { ToastContainer, toast } from "react-toastify";
 
 export function HomeContent() {
   const systemUser = useSystemUser();
@@ -19,11 +19,12 @@ export function HomeContent() {
 
   const handleDeleteSystem = async (systemId: string, systemName: string) => {
     const res = await deleteSystem(systemId, systemUser?.status!);
-    const allSys = await getAllSystems();
-    setAllSystems(allSys);
-    if (res?.status) alert(`המערכת ${systemName} נמחקה בהצלחה`);
+    if (res?.status == 200) {
+      toast.success(`המערכת ${systemName} נמחקה בהצלחה`);
+      const allSys = await getAllSystems();
+      setAllSystems(allSys);
+    }
   };
-  
 
   if (!systemUser || !shragaUser) {
     return (
@@ -85,6 +86,8 @@ export function HomeContent() {
           )}
         </HomeCenter>
       </HomeCard>
+      <ToastContainer />
     </>
   );
 }
+

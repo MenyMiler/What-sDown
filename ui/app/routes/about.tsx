@@ -11,3 +11,4 @@ export function meta({}: Route.MetaArgs) {
 export default function About() {
   return <AboutContent />;
 }
+

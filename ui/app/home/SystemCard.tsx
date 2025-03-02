@@ -6,8 +6,8 @@ import {
   Typography,
 } from "@mui/material";
 import type { IMyUser, ISystem } from "utils";
-import { useSystemStatus } from "utils/Hooks";
 import { CardWrapper, TrashIcon } from "./styled";
+import { useSystemStatus } from "utils/Hooks";
 
 interface Props {
   system: ISystem;
@@ -57,3 +57,4 @@ const SystemCard = ({ system, user, onDelete }: Props) => {
 };
 
 export default SystemCard;
+
