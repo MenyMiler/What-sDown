@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import { getCookie, type IShragaUser, type ISystem } from "utils";
+import { getCookie } from "utils";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import type { IMyUser, IShragaUser, ISystem } from "./interfaces";
 
 
 const api = axios.create({
@@ -24,7 +24,7 @@ export function useSystemUser() {
   useEffect(() => {
     const getSystemUser = getCookie("systemUser");
     if (getSystemUser) {
-      const decoded: any = jwtDecode(getSystemUser);
+      const decoded: IMyUser = jwtDecode(getSystemUser);
       if (decoded) {
         setSystemUser(decoded);
       }

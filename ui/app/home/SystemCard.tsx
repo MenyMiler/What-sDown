@@ -5,9 +5,9 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import type { IMyUser, ISystem } from "utils";
 import { CardWrapper, TrashIcon } from "./styled";
 import { useSystemStatus } from "utils/Hooks";
+import type { IMyUser, ISystem } from "utils/interfaces";
 
 interface Props {
   system: ISystem;
