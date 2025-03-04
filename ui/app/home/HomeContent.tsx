@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import SystemCard from "./SystemCard";
 import { useShragaUser, useSystems, useSystemUser } from "utils/Hooks";
-import { deleteSystem, getAllSystems } from "utils";
+import { createSystem, deleteSystem, getAllSystems } from "utils";
 import { HomeCard, HomeCenter, HomeNav } from "./styled";
 import { AuthService } from "services/authService";
 import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export function HomeContent() {
   const systemUser = useSystemUser();
@@ -23,6 +24,50 @@ export function HomeContent() {
       toast.success(`המערכת ${systemName} נמחקה בהצלחה`);
       const allSys = await getAllSystems();
       setAllSystems(allSys);
+    }
+  };
+
+  const handleCreateSystem = async () => {
+    const { value: formValues } = await Swal.fire({
+      title: "Create new system",
+      html: `
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <input id="swal-input" class="swal2-input" placeholder="Name for the new system">
+        <label style="display: flex; align-items: center; gap: 5px; margin-top: 10px;">
+          <input type="checkbox" id="swal-checkbox"> ?האם להפעיל את השירות מיד ביצירה
+        </label>
+      </div>
+    `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Create",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        return {
+          name: (document.getElementById("swal-input") as HTMLInputElement)
+            ?.value,
+          isActive: (
+            document.getElementById("swal-checkbox") as HTMLInputElement
+          )?.checked,
+        };
+      },
+    });
+
+    if (formValues?.name) {
+      try {
+        const res = await createSystem({
+          name: formValues.name,
+          status: formValues.isActive, // קובע אם השירות יתחיל מיד
+        });
+
+        if (res?.status == 200) {
+          toast.success(`המערכת ${formValues.name} נוצרה בהצלחה`);
+          const allSys = await getAllSystems();
+          setAllSystems(allSys);
+        }
+      } catch (err) {
+        console.error("Failed to create new system:", err);
+      }
     }
   };
 
@@ -64,7 +109,7 @@ export function HomeContent() {
           >
             log out
           </button>
-          <button>create system</button>
+          <button onClick={() => handleCreateSystem()}>create system</button>
         </HomeNav>
         <h1>
           Hello {shragaUser.name.firstName} {shragaUser.name.lastName}
@@ -90,4 +135,3 @@ export function HomeContent() {
     </>
   );
 }
-

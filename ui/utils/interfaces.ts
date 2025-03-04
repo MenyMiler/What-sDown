@@ -23,6 +23,11 @@ export interface ISystem  {
     status: boolean;
 }
 
+export interface NewSistem  {
+    name: string;
+    status: boolean;
+}
+
 export interface IMyUser {
     _id: string;
     status: boolean;

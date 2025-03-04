@@ -1,4 +1,5 @@
 import axios from "axios";
+import type { ISystem, NewSistem } from "./interfaces";
 
 
 export function getCookie(name: string): string | null {
@@ -46,3 +47,13 @@ export async function getAllSystems()  {
     console.error(err);
   }
 }
+
+
+export const createSystem = async (system: NewSistem) => {
+  try {
+    const response = await api.post(`/api/features/`, system);
+    return response;
+  } catch (err) {
+    console.error(err);
+  }
+};
