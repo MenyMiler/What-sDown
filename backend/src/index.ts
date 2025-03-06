@@ -9,7 +9,7 @@ const main = async () => {
 
     await server.start();
 
-    logger.info(`Server started on port: ${service.port}`);
+    logger.info(`Backend started on port: ${service.port}`);
 };
 
 main().catch(logger.error);

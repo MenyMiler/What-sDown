@@ -18,7 +18,7 @@ export function getCookie(name: string): string | null {
 
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: import.meta.env.VITE_BACKEND_BASE_ROUTE,
 
   headers: {
     "Content-Type": "application/json",

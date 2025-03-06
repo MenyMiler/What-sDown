@@ -10,14 +10,15 @@ export const config = {
         standardConcurrency: env.get('STANDARD_CONCURRENCY').default(10).asInt(),
         paginationMaxPageSize: env.get('PAGINATION_MAX_PAGE_SIZE').default(10).asInt(),
         paginationMinPageSize: env.get('PAGINATION_MIN_PAGE_SIZE').default(1).asInt(),
+        corsOrigin: env.get('CORS_ORIGIN').default('http://localhost:3000').asString(),
     },
     users: {
-        uri: env.get('USERS_SERVICE_URI').default('http://userservice:6050').asString(),
+        uri: env.get('USERS_SERVICE_URI').default('http://localhost:6050').asString(),
         baseRoute: env.get('USERS_BASE_ROUTE').default('/api/users').asString(),
     },
     features:{
-        uri: env.get('USERS_SERVICE_URI').default('http://systemservice:8000').asString(),
-        baseRoute: env.get('USERS_BASE_ROUTE').default('/api/features').asString(),
+        uri: env.get('SYSTEMS_SERVICE_URI').default('http://localhost:8000').asString(),
+        baseRoute: env.get('SYSTEMS_BASE_ROUTE').default('/api/features').asString(),
     },
     authentication: {
         baseRoute: env.get('AUTHENTICATION_BASE_ROUTE').default('/api/auth').asString(),

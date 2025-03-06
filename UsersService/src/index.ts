@@ -21,7 +21,7 @@ const main = async () => {
 
     await server.start();
 
-    logger.info(`Server started on port: ${service.port}`);
+    logger.info(`UsersService started on port: ${service.port}`);
 };
 
 main().catch(logger.error);

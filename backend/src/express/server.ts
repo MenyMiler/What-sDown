@@ -6,7 +6,6 @@ import helmet from 'helmet';
 import http from 'http';
 import passport from 'passport';
 import cors from 'cors';
-
 import { config } from '../config';
 import { errorMiddleware } from '../utils/express/error';
 import { initPassport } from '../utils/express/passport';
@@ -34,7 +33,7 @@ export class Server {
 
         app.use(
             cors({
-                origin: 'http://localhost',
+                origin: config.service.corsOrigin,
                 credentials: true,
             }),
         );
@@ -59,7 +58,8 @@ export class Server {
     }
 
     async start() {
-        this.http = this.app.listen(this.port, '0.0.0.0');
+        // this.http = this.app.listen(this.port, '0.0.0.0');
+        this.http = this.app.listen(this.port);
         await once(this.http, 'listening');
     }
 }

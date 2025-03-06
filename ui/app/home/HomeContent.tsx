@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SystemCard from "./SystemCard";
 import { useShragaUser, useSystems, useSystemUser } from "utils/Hooks";
 import { createSystem, deleteSystem, getAllSystems } from "utils";
@@ -11,6 +11,15 @@ export function HomeContent() {
   const systemUser = useSystemUser();
   const shragaUser = useShragaUser();
   const [allSystems, setAllSystems] = useSystems(systemUser);
+  const [loginUrl, setLoginUrl] = useState("");
+
+
+  useEffect(() => {
+    setLoginUrl(
+      `${import.meta.env.VITE_BACKEND_BASE_ROUTE}/api/auth/login?RelayState=${encodeURIComponent(window.location.href)}`
+    );
+  }, []);
+  
 
   useEffect(() => {
     if (systemUser) {
@@ -78,7 +87,7 @@ export function HomeContent() {
           <HomeNav></HomeNav>
           <HomeCenter>
             <a
-              href={`http://localhost:80/api/auth/login?RelayState=http://localhost:80/home`}
+              href={loginUrl}
             >
               היי עליך להתחבר
             </a>
