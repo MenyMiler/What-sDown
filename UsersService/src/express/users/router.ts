@@ -15,6 +15,8 @@ export const usersRouter = Router();
 
 usersRouter.get('/', validateRequest(getByQueryRequestSchema), wrapController(UsersController.getByQuery));
 
+usersRouter.get('/admins', wrapController(UsersController.getAllAdmins));
+
 usersRouter.get('/count', validateRequest(getCountRequestSchema), wrapController(UsersController.getCount));
 
 usersRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController(UsersController.getById));

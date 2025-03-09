@@ -30,6 +30,10 @@ export class UsersController {
         res.json(await UsersManager.getByGenesisId(req.params.genesisId));
     };
 
+    static getAllAdmins = async (_req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) => {
+        res.json(await UsersManager.getAllAdmins());
+    };
+
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
         res.json(await UsersManager.createOne(req.body));
     };

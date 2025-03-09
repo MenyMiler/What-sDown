@@ -21,6 +21,10 @@ export class UsersManager {
         return UsersModel.findOne({ genesisId }).orFail(new DocumentNotFoundError(genesisId)).lean().exec();
     };
 
+    static getAllAdmins = async (): Promise<UsersDocument[]> => {
+        return UsersModel.find({ status: true }).lean().exec();
+    };
+
     static createOne = async (user: Users): Promise<UsersDocument> => {
         return UsersModel.create(user);
     };

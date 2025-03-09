@@ -69,3 +69,13 @@ export const updateSystem = async (system: ISystem, isAdmin: boolean) => {
     console.error(err);
   }
 };
+
+
+export const getAllAdmins = async () => {
+  try {
+    const response = await api.get(`/api/users/admins`);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+  }
+};
