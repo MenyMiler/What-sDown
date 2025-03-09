@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { ISystem, NewSistem } from "./interfaces";
+import type { NewSistem } from "./interfaces";
 
 
 export function getCookie(name: string): string | null {

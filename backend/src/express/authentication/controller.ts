@@ -2,8 +2,6 @@ import { Request, Response } from 'express';
 import { config } from '../../config';
 import { ShragaUser } from '../../utils/express/passport';
 import { AuthenticationManager } from './manager';
-import { UsersService } from '../users/service';
-import jwt from 'jsonwebtoken';
 
 const {
     service: { systemUnavailableURL },
@@ -25,11 +23,6 @@ export class AuthenticationController {
 
         
         res.cookie(token, result);
-        const user = await UsersService.getByGenesisId(shragaUser.genesisId);
-        if (user) {
-            const systemUser = await jwt.sign({ ...user }, config.authentication.secret, { expiresIn: config.authentication.expiresIn, algorithm: 'HS256' }); 
-            res.cookie("systemUser", systemUser);
-        }
         return res.redirect(RelayState || '');
 
 

@@ -1,6 +1,7 @@
 
 
 export interface IShragaUser {
+    _id: string;
     id: string;
     adfsId: string;
     genesisId: string;
@@ -15,6 +16,7 @@ export interface IShragaUser {
     phoneNumbers: any[];
     photo: string;
     identityCard: string;
+    status: boolean;//if admin
   }
 
 export interface ISystem  {
@@ -28,8 +30,3 @@ export interface NewSistem  {
     status: boolean;
 }
 
-export interface IMyUser {
-    _id: string;
-    status: boolean;
-    genesisId: string
-}

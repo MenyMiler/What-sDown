@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import SystemCard from "./SystemCard";
-import { useShragaUser, useSystems, useSystemUser } from "utils/Hooks";
+import { useShragaUser, useSystems } from "utils/Hooks";
 import { createSystem, deleteSystem, getAllSystems } from "utils";
 import { HomeCard, HomeCenter, HomeNav } from "./styled";
 import { AuthService } from "services/authService";
@@ -8,27 +8,27 @@ import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 export function HomeContent() {
-  const systemUser = useSystemUser();
+  const [loading, setLoading] = useState(true);
   const shragaUser = useShragaUser();
-  const [allSystems, setAllSystems] = useSystems(systemUser);
+  const [allSystems, setAllSystems] = useSystems(shragaUser);
   const [loginUrl, setLoginUrl] = useState("");
-
 
   useEffect(() => {
     setLoginUrl(
-      `${import.meta.env.VITE_BACKEND_BASE_ROUTE}/api/auth/login?RelayState=${encodeURIComponent(window.location.href)}`
+      `${
+        import.meta.env.VITE_BACKEND_BASE_ROUTE
+      }/api/auth/login?RelayState=${encodeURIComponent(window.location.href)}`
     );
   }, []);
-  
 
   useEffect(() => {
-    if (systemUser) {
-      console.log({ systemUser });
+    if (shragaUser && allSystems.length > 0) {
+      setLoading(false);
     }
-  }, [systemUser]);
+  }, [allSystems, shragaUser]);
 
   const handleDeleteSystem = async (systemId: string, systemName: string) => {
-    const res = await deleteSystem(systemId, systemUser?.status!);
+    const res = await deleteSystem(systemId, shragaUser?.status!);
     if (res?.status == 200) {
       toast.success(`המערכת ${systemName} נמחקה בהצלחה`);
       const allSys = await getAllSystems();
@@ -80,30 +80,26 @@ export function HomeContent() {
     }
   };
 
-  if (!systemUser || !shragaUser) {
+    if (loading) {
+      return (
+        <div className="home">
+          <div className="center">
+            <h1>loading...</h1>
+          </div>
+        </div>
+      );
+    }
+
+  if (shragaUser === null) {
     return (
       <>
         <HomeCard>
           <HomeNav></HomeNav>
           <HomeCenter>
-            <a
-              href={loginUrl}
-            >
-              היי עליך להתחבר
-            </a>
+            <a href={loginUrl}>היי עליך להתחבר</a>
           </HomeCenter>
         </HomeCard>
       </>
-    );
-  }
-
-  if (!allSystems) {
-    return (
-      <div className="home">
-        <div className="center">
-          <h1>loading...</h1>
-        </div>
-      </div>
     );
   }
 
@@ -129,7 +125,7 @@ export function HomeContent() {
               <div key={system._id}>
                 <SystemCard
                   system={system}
-                  user={systemUser}
+                  user={shragaUser}
                   key={system._id}
                   onDelete={() => {
                     handleDeleteSystem(system._id, system.name);
