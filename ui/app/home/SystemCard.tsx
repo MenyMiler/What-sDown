@@ -6,24 +6,25 @@ import {
   Typography,
 } from "@mui/material";
 import { CardWrapper, TrashIcon } from "./styled";
-import { useSystemStatus } from "utils/Hooks";
-import type { IMyUser, ISystem } from "utils/interfaces";
+// import { useSystemStatus } from "utils/Hooks";
+import type {  IShragaUser, ISystem } from "utils/interfaces";
 
 interface Props {
   system: ISystem;
-  user: IMyUser;
+  user: IShragaUser;
   onDelete: () => void;
+  updateSystemStatus: (system: ISystem) => void;
 }
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 
-const SystemCard = ({ system, user, onDelete }: Props) => {
-  const { checked, toggleStatus } = useSystemStatus(
-    system.status,
-    system._id,
-    user.status
-  );
+const SystemCard = ({ system, user, onDelete, updateSystemStatus }: Props) => {
+  // const { checked, toggleStatus } = useSystemStatus(
+  //   system.status,
+  //   system._id,
+  //   user.status
+  // );
 
   return (
     <CardWrapper variant="outlined">
@@ -36,11 +37,12 @@ const SystemCard = ({ system, user, onDelete }: Props) => {
         {user.status ? (
           <Switch
             {...label}
-            checked={checked}
-            onChange={() => toggleStatus()}
+            // checked={checked}
+            checked={system.status}
+            onChange={() => updateSystemStatus({ ...system, status: !system.status })}
           />
         ) : (
-          <Switch {...label} disabled checked={checked} />
+          <Switch {...label} disabled checked={system.status} />
         )}
         <IconButton onClick={onDelete} disabled={!user.status}>
           <TrashIcon

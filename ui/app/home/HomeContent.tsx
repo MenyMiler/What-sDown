@@ -1,16 +1,20 @@
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import SystemCard from "./SystemCard";
 import { useShragaUser, useSystems } from "utils/Hooks";
-import { createSystem, deleteSystem, getAllSystems } from "utils";
+import { createSystem, deleteSystem, getAllSystems, updateSystem } from "utils";
 import { HomeCard, HomeCenter, HomeNav } from "./styled";
 import { AuthService } from "services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { useSystemStore, useUserStore } from "stores/user";
+import type { ISystem } from "utils/interfaces";
 
 export function HomeContent() {
-  const [loading, setLoading] = useState(true);
-  const shragaUser = useShragaUser();
-  const [allSystems, setAllSystems] = useSystems(shragaUser);
+  const shragaUser = useUserStore((state) => state.user);
+  const allSystems = useSystemStore((state) => state.systems);
+  const setAllSystems = useSystemStore((state) => state.setSystems);
+  useShragaUser();
+  useSystems();
   const [loginUrl, setLoginUrl] = useState("");
 
   useEffect(() => {
@@ -21,18 +25,13 @@ export function HomeContent() {
     );
   }, []);
 
-  useEffect(() => {
-    if (shragaUser && allSystems.length > 0) {
-      setLoading(false);
-    }
-  }, [allSystems, shragaUser]);
+
 
   const handleDeleteSystem = async (systemId: string, systemName: string) => {
     const res = await deleteSystem(systemId, shragaUser?.status!);
     if (res?.status == 200) {
       toast.success(`המערכת ${systemName} נמחקה בהצלחה`);
-      const allSys = await getAllSystems();
-      setAllSystems(allSys);
+      setAllSystems(await getAllSystems());
     }
   };
 
@@ -66,13 +65,12 @@ export function HomeContent() {
       try {
         const res = await createSystem({
           name: formValues.name,
-          status: formValues.isActive, // קובע אם השירות יתחיל מיד
+          status: formValues.isActive, 
         });
 
         if (res?.status == 200) {
           toast.success(`המערכת ${formValues.name} נוצרה בהצלחה`);
-          const allSys = await getAllSystems();
-          setAllSystems(allSys);
+          setAllSystems(await getAllSystems());
         }
       } catch (err) {
         console.error("Failed to create new system:", err);
@@ -80,15 +78,27 @@ export function HomeContent() {
     }
   };
 
-    if (loading) {
-      return (
-        <div className="home">
-          <div className="center">
-            <h1>loading...</h1>
-          </div>
-        </div>
-      );
+  const updateSystemStatus = async (system: ISystem) => {
+    try {
+      const res = await updateSystem(system, shragaUser?.status!);
+      if (res?.status == 200) {
+        toast.success(`המערכת ${system.name} עודכנה בהצלחה`);
+        setAllSystems(await getAllSystems());
+      }
+    } catch (err) {
+      console.error("Failed to update system:", err);
     }
+  };
+
+  if (shragaUser && allSystems.length == 0) {
+    return (
+      <div className="home">
+        <div className="center">
+          <h1>loading...</h1>
+        </div>
+      </div>
+    );
+  }
 
   if (shragaUser === null) {
     return (
@@ -130,6 +140,7 @@ export function HomeContent() {
                   onDelete={() => {
                     handleDeleteSystem(system._id, system.name);
                   }}
+                  updateSystemStatus={updateSystemStatus}
                 />
               </div>
             )

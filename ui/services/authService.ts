@@ -1,6 +1,6 @@
 import { environment } from "../utils/enve_";
 import cookies from "js-cookie";
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 
 export class AuthService {
 //   static getUser = (): UserState['user'] | null => {
@@ -38,11 +38,11 @@ export class AuthService {
     );
   };
 
-  static parseUserToken = (token: string) => {
-      try {
-          return jwtDecode(token) as any;
-      } catch (error) {
-          return null;
-      }
-  };
+  // static parseUserToken = (token: string) => {
+  //     try {
+  //         return jwtDecode(token) as any;
+  //     } catch (error) {
+  //         return null;
+  //     }
+  // };
 }

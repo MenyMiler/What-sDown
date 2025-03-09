@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { NewSistem } from "./interfaces";
+import type { ISystem, NewSistem } from "./interfaces";
+import { useSystemStore } from "stores/user";
 
 
 export function getCookie(name: string): string | null {
@@ -52,6 +53,17 @@ export async function getAllSystems()  {
 export const createSystem = async (system: NewSistem) => {
   try {
     const response = await api.post(`/api/features/`, system);
+    return response;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
+export const updateSystem = async (system: ISystem, isAdmin: boolean) => {
+  if (!isAdmin) return;
+  try {
+    const response = await api.put(`/api/features/${system._id}`, system);
     return response;
   } catch (err) {
     console.error(err);

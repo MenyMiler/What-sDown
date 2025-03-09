@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import { getCookie } from "utils";
 import axios from "axios";
 import type {  IShragaUser, ISystem } from "./interfaces";
+import { useSystemStore, useUserStore } from "stores/user";
 
 
 const api = axios.create({
@@ -16,31 +17,27 @@ const api = axios.create({
 
 
 export function useShragaUser() {
-  const [shragaUser, setShragaUser] = useState<IShragaUser | null>(null);
+  const setUser = useUserStore((state) => state.setUser);
+
   useEffect(() => {
     const getShragaUser = getCookie("vision-access-token");
     if (getShragaUser) {
       const decodedShragaUser: IShragaUser = jwtDecode(getShragaUser);
-      setShragaUser(decodedShragaUser);
+      setUser(decodedShragaUser);
     }
   }, []);
-
-  return shragaUser;
 }
 
 export function useSystems(
-  shragaUser: IShragaUser | null
 ) {
-
-
-  const [allSystems, setAllSystems] = useState<ISystem[]>([]);
-
-
+  const shragaUser = useUserStore((state) => state.user);
+  const setAllSystems = useSystemStore((state) => state.setSystems);
   useEffect(() => {
     if (shragaUser?._id) {
       const getSystems = async () => {
         try {
           const response = await api.get("/api/features");
+          // setAllSystems(response.data);
           setAllSystems(response.data);
           console.log(response.data);
         } catch (error) {
@@ -50,8 +47,6 @@ export function useSystems(
       getSystems();
     }
   }, [shragaUser]);
-
-  return [allSystems, setAllSystems] as const;
 }
 
 export function useSystemStatus(
