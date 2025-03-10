@@ -46,6 +46,8 @@ export const HomeCenter = styled("div")(() => ({
 
 
 
+
+
 export const CardWrapper = styled(Card)(() => ({
   width: "300px",
   maxWidth: "80%",
@@ -110,7 +112,26 @@ export const PromptMessage = styled("p")(() => ({
   "&::-webkit-scrollbar": {
     display: "none", 
   },
+  // backgroundColor: "#c4d683",
+  display: "flex",  
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  gap: "10px",
 }));
+
+export const AdminCardStyled = styled("div")(() => ({
+  width: "300px",
+  maxWidth: "80%",
+  height: "100px",
+  border: "1px solid gray",
+  direction: "rtl",
+  padding: "10px",
+
+  
+  // backgroundColor: "#fa0f0f",
+  
+}))
 
 
 

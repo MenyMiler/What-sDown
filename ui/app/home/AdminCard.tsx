@@ -1,24 +1,23 @@
-import { CardActions, CardContent, Typography } from "@mui/material";
-import { CardWrapper } from "./styled";
+import { Button, CardActions, CardContent, Typography } from "@mui/material";
+import { AdminCardStyled, CardWrapper } from "./styled";
 import type { IEntity } from "utils/interfaces";
 
 interface Props {
   user: IEntity;
+  updateUserStatus: () => void;
 }
 
-const AdminCard = ({ user }: Props) => {
+const AdminCard = ({ user, updateUserStatus }: Props) => {
   return (
-    <div style={{ width: "300px" }}>
-      <CardWrapper variant="outlined">
-        <CardContent>
-          <Typography variant="h6" component="div">
-            {user.firstName + " " + user.lastName}
-            Role : Admin
-          </Typography>
-        </CardContent>
-        <CardActions>CardActions</CardActions>
-      </CardWrapper>
-    </div>
+    <AdminCardStyled>
+      <Typography variant="h6" component="div">
+        {user.firstName + " " + user.lastName}
+        Role : Admin
+      </Typography>
+      <CardActions style={{ justifyContent: "center", gap: "10px" }}>
+        <Button onClick={updateUserStatus} size="small" variant="outlined" color="error">update Role</Button>
+      </CardActions>
+    </AdminCardStyled>
   );
 };
 

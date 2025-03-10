@@ -11,6 +11,8 @@ import {
     updateOneRequestSchema,
     updateOneRequestSchemaByGenesisId,
 } from './validations.js';
+import axios from "axios";
+
 
 export class UsersController {
     static getByQuery = async (req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) => {
@@ -32,7 +34,13 @@ export class UsersController {
     };
 
     static getAllAdmins = async (_req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) => {
-        res.json(await UsersManager.getAllAdmins());
+        const allMyAdmins = await UsersManager.getAllAdmins();
+        let allAdmins: any[] = [];
+        for (const admin of allMyAdmins) {
+            const user = await axios.get(`https://kartoffel.branch-yesodot.org/api/entities/${admin.genesisId}`);
+            allAdmins.push({ ...user.data, status: true });
+        }
+        res.json(allAdmins);
     };
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {

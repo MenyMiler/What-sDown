@@ -39,6 +39,7 @@ export interface IEntity {
   phone: [];
   updatedAt: string;
   _id: string;
+  status?:boolean;
 }
 
 export interface ISystem {

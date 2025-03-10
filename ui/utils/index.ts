@@ -21,8 +21,6 @@ const api = axios.create({
   withCredentials: true,
 });
 
-
-
 export async function deleteSystem(systemId: string, isAdmin: boolean) {
   if (!isAdmin || !systemId) return;
   try {
@@ -61,18 +59,33 @@ export const updateSystem = async (system: ISystem, isAdmin: boolean) => {
   }
 };
 
-
-
-export const getAllAdmins = async () => {
-  let allAdmins: IEntity[] = [];
+export const updateUser = async (user: IEntity, isAdmin: boolean) => {
+  if (!isAdmin) return;
   try {
-    const response = await api.get(`/api/users/admins`);
-    for (const admin of response.data) {
-      const user = await axios.get(`/api/entities/${admin.genesisId}`);  // השתמש ב-Proxy המקומי
-      allAdmins.push(user.data);
-    }
-    return allAdmins;
+    const response = await api.put(`/api/users/genesisId/${user._id}`, {
+      status: user.status,
+    });
+    return response;
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const getAllAdmins = async () => {
+  // let allAdmins: IEntity[] = [];
+  // try {
+  //   const response = await api.get(`/api/users/admins`);
+  //   console.log({ response });
+  //   for (const admin of response.data) {
+  //     // const user = await axios.get(`/api/entities/${admin.genesisId}`);  // השתמש ב-Proxy המקומי
+  //     const user = await axios.get(`https://kartoffel.branch-yesodot.org/api/entities/${admin.genesisId}`);
+  //     allAdmins.push({ ...user.data, status: true });
+  //   }
+  //   return allAdmins;
+  try {
+    const response = await api.get(`/api/users/admins`);
+    return response.data;
+  } catch (error: any) {
+    console.log(error);
   }
 };
