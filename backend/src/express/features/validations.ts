@@ -13,6 +13,8 @@ const optionalFields = z
     })
     .partial();
 
+
+
 // GET /api/features
 export const getByQueryRequestSchema = z.object({
     body: z.object({}),
@@ -66,3 +68,6 @@ export const deleteOneRequestSchema = z.object({
         id: zodMongoObjectId,
     }),
 });
+
+
+

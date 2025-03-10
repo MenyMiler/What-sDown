@@ -51,7 +51,7 @@ export const getByGenesisGenesisIdRequestSchema = z.object({
     body: z.object({}),
     query: z.object({}),
     params: z.object({
-        genesisId: z.string(),
+        genesisId: z.string()
     }),
 })
 
@@ -76,6 +76,15 @@ export const updateOneRequestSchema = z.object({
     params: z.object({
         id: zodMongoObjectId,
     }),
+});
+
+// PUT /api/users/:genesisId
+export const updateOneRequestSchemaByGenesisId = z.object({
+    body: statuslField.required(),
+    query: z.object({}),
+    params: z.object({
+        genesisId: z.string(),
+    }).required(),
 });
 
 // DELETE /api/users/:id

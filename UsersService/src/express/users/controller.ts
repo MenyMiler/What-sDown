@@ -9,6 +9,7 @@ import {
     getByQueryRequestSchema,
     getCountRequestSchema,
     updateOneRequestSchema,
+    updateOneRequestSchemaByGenesisId,
 } from './validations.js';
 
 export class UsersController {
@@ -40,6 +41,10 @@ export class UsersController {
 
     static updateOne = async (req: TypedRequest<typeof updateOneRequestSchema>, res: Response) => {
         res.json(await UsersManager.updateOne(req.params.id, req.body));
+    };
+
+    static updateOneByGenesisId = async (req: TypedRequest<typeof updateOneRequestSchemaByGenesisId>, res: Response) => {
+        res.json(await UsersManager.updateOneByGenesisId(req.params.genesisId, req.body));
     };
 
     static deleteOne = async (req: TypedRequest<typeof deleteOneRequestSchema>, res: Response) => {

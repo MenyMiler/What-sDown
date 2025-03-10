@@ -6,8 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CardWrapper, TrashIcon } from "./styled";
-// import { useSystemStatus } from "utils/Hooks";
-import type {  IShragaUser, ISystem } from "utils/interfaces";
+import type { IShragaUser, ISystem } from "utils/interfaces";
 
 interface Props {
   system: ISystem;
@@ -18,14 +17,7 @@ interface Props {
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-
 const SystemCard = ({ system, user, onDelete, updateSystemStatus }: Props) => {
-  // const { checked, toggleStatus } = useSystemStatus(
-  //   system.status,
-  //   system._id,
-  //   user.status
-  // );
-
   return (
     <CardWrapper variant="outlined">
       <CardContent>
@@ -37,9 +29,10 @@ const SystemCard = ({ system, user, onDelete, updateSystemStatus }: Props) => {
         {user.status ? (
           <Switch
             {...label}
-            // checked={checked}
             checked={system.status}
-            onChange={() => updateSystemStatus({ ...system, status: !system.status })}
+            onChange={() =>
+              updateSystemStatus({ ...system, status: !system.status })
+            }
           />
         ) : (
           <Switch {...label} disabled checked={system.status} />
@@ -59,4 +52,3 @@ const SystemCard = ({ system, user, onDelete, updateSystemStatus }: Props) => {
 };
 
 export default SystemCard;
-

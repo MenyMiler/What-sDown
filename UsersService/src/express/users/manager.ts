@@ -33,6 +33,10 @@ export class UsersManager {
         return UsersModel.findByIdAndUpdate(userId, update, { new: true }).orFail(new DocumentNotFoundError(userId)).lean().exec();
     };
 
+    static updateOneByGenesisId = async (genesisId: string, update: Partial<Users>): Promise<UsersDocument> => {
+        return UsersModel.findOneAndUpdate({ genesisId }, update, { new: true }).orFail(new DocumentNotFoundError(genesisId)).lean().exec();
+    };
+
     static deleteOne = async (userId: string): Promise<UsersDocument> => {
         return UsersModel.findByIdAndDelete(userId).orFail(new DocumentNotFoundError(userId)).lean().exec();
     };

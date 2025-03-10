@@ -9,6 +9,7 @@ import {
     getByQueryRequestSchema,
     getCountRequestSchema,
     updateOneRequestSchema,
+    updateOneRequestSchemaByGenesisId,
 } from './validations.js';
 
 export const usersRouter = Router();
@@ -26,5 +27,7 @@ usersRouter.get('/genesisId/:genesisId', validateRequest(getByGenesisIdRequestSc
 usersRouter.post('/', validateRequest(createOneRequestSchema), wrapController(UsersController.createOne));
 
 usersRouter.put('/:id', validateRequest(updateOneRequestSchema), wrapController(UsersController.updateOne));
+
+usersRouter.put('/genesisId/:genesisId', validateRequest(updateOneRequestSchemaByGenesisId), wrapController(UsersController.updateOneByGenesisId));
 
 usersRouter.delete('/:id', validateRequest(deleteOneRequestSchema), wrapController(UsersController.deleteOne));

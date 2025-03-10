@@ -3,10 +3,6 @@ import { styled } from "@mui/material/styles";
 
 
 
-export const CustomPrompt = styled("div")(() => ({
-
-}));
-
 export const HomeCard = styled("div")(() => ({
   height: "100vh",
   width: "100vw",
@@ -65,6 +61,56 @@ export const TrashIcon = styled("svg")(() => ({
 
 
 export const StyledYesodotIcon = styled("img")({ position: 'absolute', right: 0, height: '3rem', width: '3rem' });
+
+
+
+
+// העיצוב של המודל שמופיע על המסך
+export const PromptOverlay = styled("div")(() => ({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  backgroundColor: "rgba(0, 0, 0, 0.5)", // רקע כהה עם שקיפות
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+}));
+
+export const CustomPrompt = styled("div")(() => ({
+  width: "50%", 
+  height: "50%", 
+  backgroundColor: "white", 
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  borderRadius: "10px",
+  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+}));
+
+export const PromptTitle = styled("h2")(() => ({
+  fontSize: "1.5rem",
+  width: "100%",
+  height: "10%", 
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  
+  // backgroundColor: "blue",
+}));
+
+
+export const PromptMessage = styled("p")(() => ({
+  fontSize: "1rem",
+  width: "100%",
+  height: "90%",
+  overflowY: "scroll",
+  padding: "10px",
+  "&::-webkit-scrollbar": {
+    display: "none", 
+  },
+}));
 
 
 

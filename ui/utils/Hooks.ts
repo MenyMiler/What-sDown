@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import { getCookie } from "utils";
+import { getAllAdmins, getCookie } from "utils";
 import axios from "axios";
-import type {  IShragaUser, ISystem } from "./interfaces";
-import { useSystemStore, useUserStore } from "stores/user";
+import type {  IEntity, IShragaUser, ISystem } from "./interfaces";
+import { useAdminsStore, useSystemStore, useUserStore } from "stores/user";
 
 
 const api = axios.create({
@@ -49,27 +49,38 @@ export function useSystems(
   }, [shragaUser]);
 }
 
-export function useSystemStatus(
-  initialStatus: boolean,
-  systemId: string,
-  isAdmin: boolean
-) {
-  const [checked, setChecked] = useState(initialStatus);
-
-  const toggleStatus = () => {
-    if (!isAdmin) return;
-    setChecked((prev) => !prev);
-  };
-
+export function useGetAllAdmins() {
+  const setAllAdmins = useAdminsStore((state) => state.setAdmins);
   useEffect(() => {
-    if (!isAdmin) return;
-    api
-      .put(`/api/features/${systemId}`, { status: checked })
-      .catch(console.error);
-  }, [checked, systemId]);
-
-  return { checked, toggleStatus };
+    async function fetchAdmins() {
+      const admins = await getAllAdmins();
+      setAllAdmins(admins!);
+    }
+    fetchAdmins();
+  }, []);
 }
+
+// export function useSystemStatus(
+//   initialStatus: boolean,
+//   systemId: string,
+//   isAdmin: boolean
+// ) {
+//   const [checked, setChecked] = useState(initialStatus);
+
+//   const toggleStatus = () => {
+//     if (!isAdmin) return;
+//     setChecked((prev) => !prev);
+//   };
+
+//   useEffect(() => {
+//     if (!isAdmin) return;
+//     api
+//       .put(`/api/features/${systemId}`, { status: checked })
+//       .catch(console.error);
+//   }, [checked, systemId]);
+
+//   return { checked, toggleStatus };
+// }
 
 
 

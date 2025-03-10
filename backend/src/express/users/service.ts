@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { config } from '../../config';
-import { UserDocument } from './interface';
+import { User, UserDocument } from './interface';
 const {
     users: { uri, baseRoute },
     service,
@@ -17,6 +17,11 @@ export class UsersService {
     static async getByGenesisId(genesisId: string) {
         
         const { data } = await UsersService.api.get<UserDocument>(`/genesisId/${genesisId}`);
+        return data;
+    }
+
+    static async updateOneByGenesisId(genesisId: string, update: Partial<User>) {
+        const { data } = await UsersService.api.put<UserDocument>(`/genesisId/${genesisId}`, update);
         return data;
     }
 
