@@ -4,6 +4,7 @@ import { UsersController } from './controller.js';
 import {
     createOneRequestSchema,
     deleteOneRequestSchema,
+    getNotAdminsRequestSchema,
     getByGenesisIdRequestSchema,
     getByIdRequestSchema,
     getByQueryRequestSchema,
@@ -19,6 +20,11 @@ usersRouter.get('/', validateRequest(getByQueryRequestSchema), wrapController(Us
 usersRouter.get('/admins', wrapController(UsersController.getAllAdmins));
 
 usersRouter.get('/count', validateRequest(getCountRequestSchema), wrapController(UsersController.getCount));
+
+usersRouter.get('/notAdmins', validateRequest(getNotAdminsRequestSchema), wrapController(UsersController.getAllNotAdmins));
+
+//to add a new user admin if he not admin or not exist
+usersRouter.post('/addAdmin/:genesisId', wrapController(UsersController.addAdmin));
 
 usersRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController(UsersController.getById));
 

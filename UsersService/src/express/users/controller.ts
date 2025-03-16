@@ -4,6 +4,7 @@ import { UsersManager } from './manager.js';
 import {
     createOneRequestSchema,
     deleteOneRequestSchema,
+    getNotAdminsRequestSchema,
     getByGenesisGenesisIdRequestSchema,
     getByIdRequestSchema,
     getByQueryRequestSchema,
@@ -11,8 +12,8 @@ import {
     updateOneRequestSchema,
     updateOneRequestSchemaByGenesisId,
 } from './validations.js';
-import axios from "axios";
-
+import axios from 'axios';
+import { IEntity, UsersDocument } from './interface.js';
 
 export class UsersController {
     static getByQuery = async (req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) => {
@@ -41,6 +42,18 @@ export class UsersController {
             allAdmins.push({ ...user.data, status: true });
         }
         res.json(allAdmins);
+    };
+
+    //to get the all users from kartoffel & to returen the all users the not admins or not exist in my users data
+    static getAllNotAdmins = async (req: TypedRequest<typeof getNotAdminsRequestSchema>, res: Response) => {
+        const allMyAdmins = await UsersManager.getAllAdmins();
+        const allEntities = await UsersManager.fetchEntities(req.query.page, req.query.pageSize);
+        const allNotAdmins = allEntities.filter((entity: IEntity) => !allMyAdmins.find((admin: UsersDocument) => admin.genesisId === entity._id));
+        res.json(allNotAdmins);
+    };
+
+    static addAdmin = async (req: TypedRequest<typeof getByGenesisGenesisIdRequestSchema>, res: Response) => {
+        res.json(await UsersManager.addAdmin(req.params.genesisId));
     };
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {

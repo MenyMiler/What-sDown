@@ -9,7 +9,7 @@ const mongoObjectId = z
 
 const genesisId = z.object({
     genesisId: z.string(),
-})
+});
 
 const statuslField = z
     .object({
@@ -51,9 +51,9 @@ export const getByGenesisGenesisIdRequestSchema = z.object({
     body: z.object({}),
     query: z.object({}),
     params: z.object({
-        genesisId: z.string()
+        genesisId: z.string(),
     }),
-})
+});
 
 // GET /api/users/:GenesisId
 export const getByGenesisIdRequestSchema = z.object({
@@ -82,9 +82,11 @@ export const updateOneRequestSchema = z.object({
 export const updateOneRequestSchemaByGenesisId = z.object({
     body: statuslField.required(),
     query: z.object({}),
-    params: z.object({
-        genesisId: z.string(),
-    }).required(),
+    params: z
+        .object({
+            genesisId: z.string(),
+        })
+        .required(),
 });
 
 // DELETE /api/users/:id
@@ -94,4 +96,17 @@ export const deleteOneRequestSchema = z.object({
     params: z.object({
         id: zodMongoObjectId,
     }),
+});
+
+//GET /api/users/notAdmins?page=1&pageSize=10
+export const getNotAdminsRequestSchema = z.object({
+    body: z.object({}),
+    query: z
+    .object({
+        page: z.coerce.number().min(1).default(1),
+        pageSize: z.coerce.number().min(1).max(100).default(10),
+    })
+    .partial(),
+    params: z.object({}),
+
 });
