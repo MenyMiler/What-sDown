@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 
@@ -137,3 +137,44 @@ export const AdminCardStyled = styled("div")(() => ({
 
 
 
+
+export const PlusButton = styled(Button)(() => ({
+  position: "absolute",
+  bottom: "26%",
+  right: "26%",
+  width: "40px",
+  borderRadius: "50%",
+  backgroundColor: "#007bff",
+  color: "white",
+  fontSize: "1.5rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+  transition: "transform 0.2s ease",
+  ":hover": {
+    transform: "scale(1.1)",
+    backgroundColor: "#0056b3",
+  },
+}));
+
+
+export const CloseButton = styled(Button)(() => ({
+  position: "absolute",
+  top: "25%",
+  left: "25%",
+  height: "40px",
+  width: "40px",
+  backgroundColor: "#ff3741",
+  color: "white",
+  fontSize: "0.9rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+  transition: "transform 0.2s ease",
+  ":hover": {
+    transform: "scale(1.1)",
+    backgroundColor: "#ff0000",
+  },
+}));

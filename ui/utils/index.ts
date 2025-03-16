@@ -72,16 +72,6 @@ export const updateUser = async (user: IEntity, isAdmin: boolean) => {
 };
 
 export const getAllAdmins = async () => {
-  // let allAdmins: IEntity[] = [];
-  // try {
-  //   const response = await api.get(`/api/users/admins`);
-  //   console.log({ response });
-  //   for (const admin of response.data) {
-  //     // const user = await axios.get(`/api/entities/${admin.genesisId}`);  // השתמש ב-Proxy המקומי
-  //     const user = await axios.get(`https://kartoffel.branch-yesodot.org/api/entities/${admin.genesisId}`);
-  //     allAdmins.push({ ...user.data, status: true });
-  //   }
-  //   return allAdmins;
   try {
     const response = await api.get(`/api/users/admins`);
     return response.data;
@@ -89,3 +79,15 @@ export const getAllAdmins = async () => {
     console.log(error);
   }
 };
+
+
+
+export const fetchEntities = async (page: number = 1, pageSize: number = 10): Promise<any[]> => {
+  try {
+    const response = await api.get(`/api/users/notAdmins?page=${page}&pageSize=${pageSize}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch entities:", error);
+    return [];
+  }
+}
