@@ -12,7 +12,7 @@ const EntityNewAdmin: React.FC = () => {
 
     const loadMoreOptions = async () => {
         setLoading(true);
-        const newOptions = await fetchEntities(page, 5);
+        const newOptions = await fetchEntities(page, 10);
         setOptions((prev) => [...prev, ...newOptions]);
         setLoading(false);
     };
