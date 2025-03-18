@@ -480,8 +480,9 @@ export function HomeContent() {
           <CustomPrompt onClick={(e: React.MouseEvent) => e.stopPropagation()}>
             <PromptTitle>All Admins</PromptTitle>
             <PromptMessage>
-              {allAdmins.length > 0 ? (
+              {allAdmins.length > 1 ? (
                 allAdmins.map((admin) => (
+                  admin._id !== shragaUser?.genesisId &&
                   <AdminCard
                     key={admin._id}
                     user={admin}
