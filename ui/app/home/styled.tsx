@@ -1,4 +1,4 @@
-import { Button, Card } from "@mui/material";
+import { backdropClasses, Button, Card } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 
@@ -65,8 +65,6 @@ export const TrashIcon = styled("svg")(() => ({
 export const StyledYesodotIcon = styled("img")({ position: 'absolute', right: 0, height: '3rem', width: '3rem' });
 
 
-
-
 // העיצוב של המודל שמופיע על המסך
 export const PromptOverlay = styled("div")(() => ({
   position: "fixed",
@@ -81,8 +79,10 @@ export const PromptOverlay = styled("div")(() => ({
 }));
 
 export const CustomPrompt = styled("div")(() => ({
+  position: "absolute",
   width: "50%", 
   height: "50%", 
+  minWidth: "305px",
   backgroundColor: "white", 
   display: "flex",
   flexDirection: "column",
@@ -98,13 +98,10 @@ export const PromptTitle = styled("h2")(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  
-  // backgroundColor: "blue",
 }));
 
 
-export const PromptMessage = styled("p")(() => ({
-  fontSize: "1rem",
+export const PromptMessage = styled("div")(() => ({
   width: "100%",
   height: "90%",
   overflowY: "scroll",
@@ -112,7 +109,6 @@ export const PromptMessage = styled("p")(() => ({
   "&::-webkit-scrollbar": {
     display: "none", 
   },
-  // backgroundColor: "#c4d683",
   display: "flex",  
   justifyContent: "center",
   alignItems: "center",
@@ -122,15 +118,10 @@ export const PromptMessage = styled("p")(() => ({
 
 export const AdminCardStyled = styled("div")(() => ({
   width: "300px",
-  maxWidth: "80%",
   height: "100px",
   border: "1px solid gray",
   direction: "rtl",
   padding: "10px",
-
-  
-  // backgroundColor: "#fa0f0f",
-  
 }))
 
 
@@ -140,8 +131,8 @@ export const AdminCardStyled = styled("div")(() => ({
 
 export const PlusButton = styled(Button)(() => ({
   position: "absolute",
-  bottom: "26%",
-  right: "26%",
+  bottom: "1%",
+  right: "1%",
   width: "40px",
   borderRadius: "50%",
   backgroundColor: "#007bff",
@@ -161,8 +152,8 @@ export const PlusButton = styled(Button)(() => ({
 
 export const CloseButton = styled(Button)(() => ({
   position: "absolute",
-  top: "25%",
-  left: "25%",
+  top: "0%",
+  left: "0%",
   height: "40px",
   width: "40px",
   backgroundColor: "#ff3741",
@@ -177,4 +168,12 @@ export const CloseButton = styled(Button)(() => ({
     transform: "scale(1.1)",
     backgroundColor: "#ff0000",
   },
+}));
+
+
+export const FlexDirectionColumn = styled("div")(() => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
+  gap: "10%",
 }));

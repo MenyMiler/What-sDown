@@ -244,9 +244,7 @@
 //   );
 // }
 
-
-
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import SystemCard from "./SystemCard";
 import { useGetAllAdmins, useShragaUser, useSystems } from "utils/Hooks";
 import {
@@ -254,6 +252,7 @@ import {
   deleteSystem,
   getAllAdmins,
   getAllSystems,
+  saveNewAdmin,
   updateSystem,
   updateUser,
 } from "utils";
@@ -267,6 +266,7 @@ import {
   PromptMessage,
   PlusButton,
   CloseButton,
+  FlexDirectionColumn,
 } from "./styled";
 import { AuthService } from "services/authService";
 import { ToastContainer, toast } from "react-toastify";
@@ -289,8 +289,7 @@ export function HomeContent() {
   useGetAllAdmins();
   const [loginUrl, setLoginUrl] = useState("");
   const [openAdminsPopUp, setOpenAdminsPopUp] = useState(false);
-  const [selectedEntity, setSelectedEntity] = useState<IEntity | null>(null);
-
+  const [selectedAdmin, setSelectedAdmin] = useState<IEntity | null>(null);
 
   const handlePlusClick = () => {
     setOpenAdminsPopUp(false);
@@ -401,6 +400,24 @@ export function HomeContent() {
     }
   };
 
+  const handleSaveNewAdmin = async (
+  ) => {
+    if (selectedAdmin) {
+      try {
+        const response = await saveNewAdmin(selectedAdmin);
+        if (response?.status === 200) {
+          setAdmins(await getAllAdmins());
+          alert(`Entity ${selectedAdmin.firstName} ${selectedAdmin.lastName} added as Admin`);
+        }
+      } catch (error) {
+        console.error("Error saving new admin:", error);
+        alert("There was an error while adding the admin.");
+      }
+    }
+  };
+
+
+
   if (shragaUser && allSystems.length === 0) {
     return (
       <div className="home">
@@ -481,16 +498,18 @@ export function HomeContent() {
             <PromptTitle>All Admins</PromptTitle>
             <PromptMessage>
               {allAdmins.length > 1 ? (
-                allAdmins.map((admin) => (
-                  admin._id !== shragaUser?.genesisId &&
-                  <AdminCard
-                    key={admin._id}
-                    user={admin}
-                    updateUserStatus={() =>
-                      updateUserStatus({ ...admin, status: false })
-                    }
-                  />
-                ))
+                allAdmins.map(
+                  (admin) =>
+                    admin._id !== shragaUser?.genesisId && (
+                      <AdminCard
+                        key={admin._id}
+                        user={admin}
+                        updateUserStatus={() =>
+                          updateUserStatus({ ...admin, status: false })
+                        }
+                      />
+                    )
+                )
               ) : (
                 <p>No admins found</p>
               )}
@@ -501,8 +520,8 @@ export function HomeContent() {
               >
                 X
               </CloseButton>
-              <PlusButton onClick={handlePlusClick}>+</PlusButton>
             </PromptMessage>
+            <PlusButton onClick={handlePlusClick}>+</PlusButton>
           </CustomPrompt>
         </PromptOverlay>
       )}
@@ -510,24 +529,26 @@ export function HomeContent() {
       {openNewPopup && (
         <PromptOverlay onClick={handleBackClick}>
           <CustomPrompt onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-            <PromptTitle>New Popup</PromptTitle>
+            <PromptTitle>Add New Admin</PromptTitle>
             <PromptMessage>
-              <EntityNewAdmin />
-              <p>This is the new popup.</p>
-              <Button
-                onClick={handleBackClick}
-                variant="contained"
-                color="error"
-              >
-                Back
-              </Button>
-              <Button
-                onClick={() => {alert("save")}}
-                variant="contained"
-                color="success"
-              >
-                Save
-              </Button>
+              <EntityNewAdmin setSelectedAdmin={setSelectedAdmin} />
+              <FlexDirectionColumn>
+                <Button
+                  onClick={handleBackClick}
+                  variant="contained"
+                  color="error"
+                >
+                  Back
+                </Button>
+                <Button
+                  onClick={handleSaveNewAdmin}
+                  variant="contained"
+                  color="success"
+                >
+                  Save
+                </Button>
+              </FlexDirectionColumn>
+
               <CloseButton
                 onClick={() => setOpenNewPopup(false)}
                 variant="contained"

@@ -91,3 +91,13 @@ export const fetchEntities = async (page: number = 1, pageSize: number = 10): Pr
     return [];
   }
 }
+
+
+export const saveNewAdmin = async (user: IEntity) => {
+  try {
+    const response = await api.post(`/api/users/addAdmin/${user._id}`);
+    return response;
+  } catch (err) {
+    console.error(err);
+  }
+};
