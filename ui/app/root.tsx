@@ -6,9 +6,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
 import type { Route } from "./+types/root";
 import "./app.css";
+import "../i18n"; // אם הקובץ root.tsx נמצא בתיקיית app
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,11 +25,15 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="he">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" href="https://e7.pngegg.com/pngimages/863/358/png-clipart-computer-icons-symbol-technical-support-symbol-miscellaneous-service-thumbnail.png" type="image/x-icon" />
+        <link
+          rel="shortcut icon"
+          href="https://e7.pngegg.com/pngimages/863/358/png-clipart-computer-icons-symbol-technical-support-symbol-miscellaneous-service-thumbnail.png"
+          type="image/x-icon"
+        />
         <Meta />
         <Links />
       </head>
@@ -74,4 +78,3 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
-

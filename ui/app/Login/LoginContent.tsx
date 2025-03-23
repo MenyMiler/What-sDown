@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import { useEffect } from "react";
 
 
@@ -13,7 +14,8 @@ const LoginContent = () => {
   
   return (
     <div>
-      login
+      {/* login */}
+      {i18next.t("login")}
     </div>
   )
 }

@@ -1,9 +1,10 @@
+import i18next from "i18next";
 import type { Route } from "../+types/root";
 import AboutContent from "../About/AboutContent";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "About Us" },
+    { title: i18next.t("headings.about") }, 
     { name: "description", content: "Learn more about us." },
   ];
 }

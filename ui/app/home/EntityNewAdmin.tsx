@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
-import { fetchEntities, getAllAdmins } from "utils";
-import { saveNewAdmin } from "utils";
+import { fetchEntities } from "utils";
 import type { IEntity } from "utils/interfaces";
-import { useAdminsStore } from "stores/user";
+import i18next from "i18next";
 
 interface Prompt {
   setSelectedAdmin: (admin: IEntity) => void;
@@ -15,7 +14,6 @@ const EntityNewAdmin: React.FC<Prompt> = ({ setSelectedAdmin }) => {
   const [options, setOptions] = useState<IEntity[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
-  const setAdmins = useAdminsStore((state) => state.setAdmins);
 
   const loadMoreOptions = async () => {
     setLoading(true);
@@ -38,23 +36,7 @@ const EntityNewAdmin: React.FC<Prompt> = ({ setSelectedAdmin }) => {
     }
   };
 
-//   const handleSelectEntity = async (
-//     event: React.SyntheticEvent,
-//     value: IEntity | null
-//   ) => {
-//     if (value) {
-//       try {
-//         const response = await saveNewAdmin(value);
-//         if (response?.status === 200) {
-//           setAdmins(await getAllAdmins());
-//           alert(`Entity ${value.firstName} ${value.lastName} added as Admin`);
-//         }
-//       } catch (error) {
-//         console.error("Error saving new admin:", error);
-//         alert("There was an error while adding the admin.");
-//       }
-//     }
-//   };
+
 
   return (
     <Autocomplete
@@ -67,7 +49,7 @@ const EntityNewAdmin: React.FC<Prompt> = ({ setSelectedAdmin }) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Select Entity"
+          label={i18next.t("labels.select_admin")}
           variant="outlined"
           InputProps={{
             ...params.InputProps,
@@ -86,7 +68,6 @@ const EntityNewAdmin: React.FC<Prompt> = ({ setSelectedAdmin }) => {
         onScroll: handleScroll,
         style: { maxHeight: 200, overflow: "auto" },
       }}
-      //   onChange={handleSelectEntity}
       onChange={(event, value) => {value && setSelectedAdmin(value);}}
     />
   );
