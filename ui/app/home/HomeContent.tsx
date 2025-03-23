@@ -31,6 +31,7 @@ import AdminCard from "./AdminCard";
 import { Button } from "@mui/material";
 import EntityNewAdmin from "./EntityNewAdmin";
 import i18next from "i18next";
+import "./styled";
 
 export function HomeContent() {
   const shragaUser = useUserStore((state) => state.user);
@@ -76,7 +77,9 @@ export function HomeContent() {
   const handleDeleteSystem = async (systemId: string, systemName: string) => {
     const res = await deleteSystem(systemId, shragaUser?.status!);
     if (res?.status === 200) {
-      toast.success(i18next.t("toast_messages.system_deleted", { name:systemName }));
+      toast.success(
+        i18next.t("toast_messages.system_deleted", { name: systemName })
+      );
       setAllSystems(await getAllSystems());
     }
   };
@@ -86,9 +89,13 @@ export function HomeContent() {
       title: i18next.t("headings.new_system"),
       html: `
       <div style="display: flex; flex-direction: column; align-items: center; direction: rtl">
-        <input id="swal-input" class="swal2-input" placeholder="${i18next.t("labels.Name_for_system")}">
+        <input id="swal-input" class="swal2-input" placeholder="${i18next.t(
+          "labels.Name_for_system"
+        )}">
         <label style="display: flex; align-items: center; gap: 5px; margin-top: 10px;">
-          <input type="checkbox" id="swal-checkbox"> ${i18next.t("labels.if_activate_system")}
+          <input type="checkbox" id="swal-checkbox"> ${i18next.t(
+            "labels.if_activate_system"
+          )}
         </label>
       </div>
     `,
@@ -116,7 +123,11 @@ export function HomeContent() {
         });
 
         if (res?.status === 200) {
-          toast.success(i18next.t("toast_messages.system_created", { name: formValues.name }));
+          toast.success(
+            i18next.t("toast_messages.system_created", {
+              name: formValues.name,
+            })
+          );
           setAllSystems(await getAllSystems());
         }
       } catch (err) {
@@ -129,7 +140,9 @@ export function HomeContent() {
     try {
       const res = await updateSystem(system, shragaUser?.status!);
       if (res?.status === 200) {
-        toast.success(i18next.t("toast_messages.system_updated", { name: system.name }));
+        toast.success(
+          i18next.t("toast_messages.system_updated", { name: system.name })
+        );
         setAllSystems(await getAllSystems());
       }
     } catch (err) {
@@ -142,7 +155,10 @@ export function HomeContent() {
       const res = await updateUser(user, shragaUser?.status!);
       if (res?.status === 200) {
         toast.success(
-          i18next.t("toast_messages.user_updated", {firstName: user.firstName, lastName: user.lastName})
+          i18next.t("toast_messages.user_updated", {
+            firstName: user.firstName,
+            lastName: user.lastName,
+          })
         );
         const admins = (await getAllAdmins()) || [];
         setAdmins(admins);
@@ -158,7 +174,12 @@ export function HomeContent() {
         const response = await saveNewAdmin(selectedAdmin);
         if (response?.status === 200) {
           setAdmins(await getAllAdmins());
-          toast.success(i18next.t("toast_messages.admin_added", {firstName: selectedAdmin.firstName, lastName: selectedAdmin.lastName}));
+          toast.success(
+            i18next.t("toast_messages.admin_added", {
+              firstName: selectedAdmin.firstName,
+              lastName: selectedAdmin.lastName,
+            })
+          );
         }
       } catch (error) {
         console.error("Error saving new admin:", error);
@@ -198,7 +219,8 @@ export function HomeContent() {
             variant="outlined"
             color="error"
             onClick={() => {
-              AuthService.logout();
+              // AuthService.logout();
+              alert("logout");
             }}
           >
             {i18next.t("buttons.logout")}
@@ -219,24 +241,28 @@ export function HomeContent() {
           </Button>
         </HomeNav>
         <h1>
-          {i18next.t("user_info.welcome_user", { firstName: shragaUser.name.firstName, lastName: shragaUser.name.lastName })}
+          {i18next.t("user_info.welcome_user", {
+            firstName: shragaUser.name.firstName,
+            lastName: shragaUser.name.lastName,
+          })}
         </h1>
         <HomeCenter>
-          {allSystems.map(
-            (system: { _id: string; name: string; status: boolean }) => (
-              <div key={system._id}>
-                <SystemCard
-                  system={system}
-                  user={shragaUser}
-                  key={system._id}
-                  onDelete={() => {
-                    handleDeleteSystem(system._id, system.name);
-                  }}
-                  updateSystemStatus={updateSystemStatus}
-                />
-              </div>
-            )
-          )}
+          {allSystems &&
+            allSystems.map(
+              (system: { _id: string; name: string; status: boolean }) => (
+                <div key={system._id}>
+                  <SystemCard
+                    system={system}
+                    user={shragaUser}
+                    key={system._id}
+                    onDelete={() => {
+                      handleDeleteSystem(system._id, system.name);
+                    }}
+                    updateSystemStatus={updateSystemStatus}
+                  />
+                </div>
+              )
+            )}
         </HomeCenter>
       </HomeCard>
       <ToastContainer />
