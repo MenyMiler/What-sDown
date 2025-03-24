@@ -19,6 +19,7 @@ export default {
     user_updated: "המשתמש {{firstName}} {{lastName}} עודכן בהצלחה",
     admin_added: "המנהל {{firstName}} {{lastName}} נוסף בהצלחה",
     system_name_required: "שם המערכת הוא שדה חובה",
+    no_permission: "אין הרשאה לבצע פעולה זו",
     test: "בדיקה",
   },
   headings: {

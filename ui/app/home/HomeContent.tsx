@@ -47,6 +47,12 @@ export function HomeContent() {
   const [openAdminsPopUp, setOpenAdminsPopUp] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState<IEntity | null>(null);
 
+
+  const handleOpenAdminsPopUp = () => {
+    if(shragaUser.type == "USER") return toast.error(i18next.t("toast_messages.no_permission"));
+    setOpenAdminsPopUp(true);
+  };
+
   const handlePlusClick = () => {
     setOpenAdminsPopUp(false);
     setOpenNewPopup(true);
@@ -85,6 +91,7 @@ export function HomeContent() {
   };
 
   const handleCreateSystem = async () => {
+    if(shragaUser.type == "USER") return toast.error(i18next.t("toast_messages.no_permission"));
     const { value: formValues } = await Swal.fire({
       title: i18next.t("headings.new_system"),
       html: `
@@ -235,7 +242,7 @@ export function HomeContent() {
           <Button
             variant="outlined"
             color="inherit"
-            onClick={() => setOpenAdminsPopUp(true)}
+            onClick={() => handleOpenAdminsPopUp()}
           >
             {i18next.t("buttons.all_admins")}
           </Button>
