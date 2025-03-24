@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 
-const statuslField = z
+const typeUserField = z
     .object({
-        status: z.boolean(),
+        type: z.enum(['ADMIN', 'USER']),
     })
     .required();
 
@@ -14,7 +14,7 @@ const statuslField = z
 
 // PUT /api/users/:genesisId
 export const updateOneRequestSchemaByGenesisId = z.object({
-    body: statuslField,
+    body: typeUserField,
     query: z.object({}),
     params: z.object({
         genesisId: z.string(),

@@ -1,7 +1,14 @@
 
+export enum typeUser {
+    user = "USER",
+    admin = "ADMIN",
+}
+
+
+
 export interface User {
     genesisId: string;
-    status: Boolean;
+    type: typeUser;
 }
 export interface UserDocument extends User {
     _id: string;

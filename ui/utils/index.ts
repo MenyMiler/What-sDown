@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { IEntity, IShragaUser, ISystem, NewSistem } from "./interfaces";
+import { typeUser, type IEntity, type IShragaUser, type ISystem, type NewSistem } from "./interfaces";
 
 export function getCookie(name: string): string | null {
   const cookies = document.cookie.split("; ");
@@ -21,8 +21,8 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export async function deleteSystem(systemId: string, isAdmin: boolean) {
-  if (!isAdmin || !systemId) return;
+export async function deleteSystem(systemId: string, type: typeUser) {
+  if (type === typeUser.user || !systemId) return;
   try {
     const response = await api.delete(`/api/features/${systemId}`);
     return response;
@@ -49,8 +49,8 @@ export const createSystem = async (system: NewSistem) => {
   }
 };
 
-export const updateSystem = async (system: ISystem, isAdmin: boolean) => {
-  if (!isAdmin) return;
+export const updateSystem = async (system: ISystem, type: typeUser) => {
+  if (type === typeUser.user) return;
   try {
     const response = await api.put(`/api/features/${system._id}`, system);
     return response;
@@ -59,11 +59,11 @@ export const updateSystem = async (system: ISystem, isAdmin: boolean) => {
   }
 };
 
-export const updateUser = async (user: IEntity, isAdmin: boolean) => {
-  if (!isAdmin) return;
+export const updateUser = async (user: IEntity, type: typeUser) => {
+  if (type === typeUser.user) return;
   try {
     const response = await api.put(`/api/users/genesisId/${user._id}`, {
-      status: user.status,
+      type: user.type,
     });
     return response;
   } catch (err) {

@@ -1,3 +1,13 @@
+
+
+
+export enum typeUser {
+    user = "USER",
+    admin = "ADMIN",
+}
+
+
+
 export interface IShragaUser {
   _id: string;
   id: string;
@@ -14,7 +24,7 @@ export interface IShragaUser {
   phoneNumbers: any[];
   photo: string;
   identityCard: string;
-  status: boolean; //if admin
+  type: typeUser; //if admin
 }
 
 export interface IEntity {
@@ -39,7 +49,7 @@ export interface IEntity {
   phone: [];
   updatedAt: string;
   _id: string;
-  status?:boolean;
+  type?:typeUser;
 }
 
 export interface ISystem {

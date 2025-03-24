@@ -1,5 +1,5 @@
 import { DocumentNotFoundError } from '../../utils/errors.js';
-import { IEntity, Users, UsersDocument } from './interface.js';
+import { IEntity, typeUser, Users, UsersDocument } from './interface.js';
 import { UsersModel } from './model.js';
 
 export class UsersManager {
@@ -22,7 +22,7 @@ export class UsersManager {
     };
 
     static getAllAdmins = async (): Promise<UsersDocument[]> => {
-        return UsersModel.find({ status: true }).lean().exec();
+        return UsersModel.find({ type: 'ADMIN' }).lean().exec();
     };
 
     static createOne = async (user: Users): Promise<UsersDocument> => {
@@ -62,9 +62,9 @@ export class UsersManager {
         const user = await UsersModel.findOne({ genesisId });
 
         if(!user) {
-            return UsersManager.createOne({ status: true, genesisId });
-        }else if(!user.status) {
-            return UsersManager.updateOneByGenesisId(genesisId, { status: true });
+            return UsersManager.createOne({ type: typeUser.admin, genesisId });
+        }else if(user.type == typeUser.user) {
+            return UsersManager.updateOneByGenesisId(genesisId, { type: typeUser.admin });
         }
         return user;
     };

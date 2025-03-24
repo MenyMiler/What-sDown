@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { config } from '../src/config.js';
-import { Users } from '../src/express/users/interface.js';
+import { typeUser, Users } from '../src/express/users/interface.js';
 import { Server } from '../src/express/server.js';
 
 const { mongo } = config;
@@ -26,7 +26,8 @@ const removeAllCollections = async () => {
 };
 
 const exampleUser: Users = {
-    status: true,
+    type: typeUser.admin,
+    genesisId: '1',
 };
 
 describe('e2e users api testing', () => {

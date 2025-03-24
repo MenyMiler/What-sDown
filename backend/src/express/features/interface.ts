@@ -7,3 +7,8 @@ export interface Feature {
 export interface FeatureDocument extends Feature {
     _id: string;
 }
+
+export enum typeUser {
+    user = "USER",
+    admin = "ADMIN",
+}

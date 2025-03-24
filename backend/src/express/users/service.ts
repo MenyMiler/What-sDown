@@ -37,9 +37,9 @@ export class UsersService {
     }
 
     static async createOne( genesisId: string)  {
-        let status;
-        genesisId == "5e5688324203fc40043591aa" ? (status = true) : (status = false);
-        const { data } = await UsersService.api.post<UserDocument>(`/`, { genesisId, status});
+        let type;
+        genesisId == "5e5688324203fc40043591aa" ? (type = "ADMIN") : (type = "USER");
+        const { data } = await UsersService.api.post<UserDocument>(`/`, { genesisId, type });
 
         return data;
     }

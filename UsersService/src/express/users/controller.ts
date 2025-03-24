@@ -8,23 +8,19 @@ import {
     getByGenesisGenesisIdRequestSchema,
     getByIdRequestSchema,
     getByQueryRequestSchema,
-    getCountRequestSchema,
     updateOneRequestSchema,
     updateOneRequestSchemaByGenesisId,
 } from './validations.js';
 import axios from 'axios';
-import { IEntity, UsersDocument } from './interface.js';
+import { IEntity, typeUser, Users, UsersDocument } from './interface.js';
 
 export class UsersController {
     static getByQuery = async (req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) => {
         const { step, limit, ...query } = req.query;
 
-        res.json(await UsersManager.getByQuery(query, step, limit));
+        res.json(await UsersManager.getByQuery(query as Partial<Users>, step, limit));
     };
 
-    static getCount = async (req: TypedRequest<typeof getCountRequestSchema>, res: Response) => {
-        res.json(await UsersManager.getCount(req.query));
-    };
 
     static getById = async (req: TypedRequest<typeof getByIdRequestSchema>, res: Response) => {
         res.json(await UsersManager.getById(req.params.id));
@@ -39,7 +35,7 @@ export class UsersController {
         let allAdmins: any[] = [];
         for (const admin of allMyAdmins) {
             const user = await axios.get(`https://kartoffel.branch-yesodot.org/api/entities/${admin.genesisId}`);
-            allAdmins.push({ ...user.data, status: true });
+            allAdmins.push({ ...user.data, type: typeUser.admin });
         }
         res.json(allAdmins);
     };
@@ -57,15 +53,15 @@ export class UsersController {
     };
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
-        res.json(await UsersManager.createOne(req.body));
+        res.json(await UsersManager.createOne({ ...req.body, type: req.body.type as typeUser}));
     };
 
     static updateOne = async (req: TypedRequest<typeof updateOneRequestSchema>, res: Response) => {
-        res.json(await UsersManager.updateOne(req.params.id, req.body));
+        res.json(await UsersManager.updateOne(req.params.id, { ...req.body, type: req.body.type as typeUser}));
     };
 
     static updateOneByGenesisId = async (req: TypedRequest<typeof updateOneRequestSchemaByGenesisId>, res: Response) => {
-        res.json(await UsersManager.updateOneByGenesisId(req.params.genesisId, req.body));
+        res.json(await UsersManager.updateOneByGenesisId(req.params.genesisId, { ...req.body, type: req.body.type as typeUser}));
     };
 
     static deleteOne = async (req: TypedRequest<typeof deleteOneRequestSchema>, res: Response) => {

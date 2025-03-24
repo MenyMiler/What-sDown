@@ -26,7 +26,7 @@ import { AuthService } from "services/authService";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { useAdminsStore, useSystemStore, useUserStore } from "stores/user";
-import type { IEntity, ISystem } from "utils/interfaces";
+import { typeUser, type IEntity, type ISystem } from "utils/interfaces";
 import AdminCard from "./AdminCard";
 import { Button } from "@mui/material";
 import EntityNewAdmin from "./EntityNewAdmin";
@@ -75,7 +75,7 @@ export function HomeContent() {
   }, [allAdmins, shragaUser]);
 
   const handleDeleteSystem = async (systemId: string, systemName: string) => {
-    const res = await deleteSystem(systemId, shragaUser?.status!);
+    const res = await deleteSystem(systemId, shragaUser?.type!);
     if (res?.status === 200) {
       toast.success(
         i18next.t("toast_messages.system_deleted", { name: systemName })
@@ -138,7 +138,7 @@ export function HomeContent() {
 
   const updateSystemStatus = async (system: ISystem) => {
     try {
-      const res = await updateSystem(system, shragaUser?.status!);
+      const res = await updateSystem(system, shragaUser?.type!);
       if (res?.status === 200) {
         toast.success(
           i18next.t("toast_messages.system_updated", { name: system.name })
@@ -152,7 +152,7 @@ export function HomeContent() {
 
   const updateUserStatus = async (user: IEntity) => {
     try {
-      const res = await updateUser(user, shragaUser?.status!);
+      const res = await updateUser(user, shragaUser?.type!);
       if (res?.status === 200) {
         toast.success(
           i18next.t("toast_messages.user_updated", {
@@ -280,7 +280,7 @@ export function HomeContent() {
                         key={admin._id}
                         user={admin}
                         updateUserStatus={() =>
-                          updateUserStatus({ ...admin, status: false })
+                          updateUserStatus({ ...admin, type: typeUser.user })
                         }
                       />
                     )

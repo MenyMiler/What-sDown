@@ -8,7 +8,6 @@ import {
     getByGenesisIdRequestSchema,
     getByIdRequestSchema,
     getByQueryRequestSchema,
-    getCountRequestSchema,
     updateOneRequestSchema,
     updateOneRequestSchemaByGenesisId,
 } from './validations.js';
@@ -19,7 +18,6 @@ usersRouter.get('/', validateRequest(getByQueryRequestSchema), wrapController(Us
 
 usersRouter.get('/admins', wrapController(UsersController.getAllAdmins));
 
-usersRouter.get('/count', validateRequest(getCountRequestSchema), wrapController(UsersController.getCount));
 
 usersRouter.get('/notAdmins', validateRequest(getNotAdminsRequestSchema), wrapController(UsersController.getAllNotAdmins));
 

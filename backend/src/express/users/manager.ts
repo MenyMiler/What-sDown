@@ -1,5 +1,5 @@
 import { UsersService } from '../users/service';
-import { User } from './interface';
+import { typeUser, User } from './interface';
 
 export class UsersManager {
     static async updateOneByGenesisId(genesisId: string, update: Partial<User>, genesisIdAdmin: string): Promise<User> {
@@ -8,7 +8,7 @@ export class UsersManager {
         }
 
         const user = await UsersService.getByGenesisId(genesisIdAdmin);
-        if (user.status) {
+        if (user.type === typeUser.admin) {
             return await UsersService.updateOneByGenesisId(genesisId, update);
         }
 

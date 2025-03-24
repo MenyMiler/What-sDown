@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CardWrapper, TrashIcon } from "./styled";
-import type { IShragaUser, ISystem } from "utils/interfaces";
+import { typeUser, type IShragaUser, type ISystem } from "utils/interfaces";
 
 interface Props {
   system: ISystem;
@@ -26,7 +26,7 @@ const SystemCard = ({ system, user, onDelete, updateSystemStatus }: Props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        {user.status ? (
+        {user.type === typeUser.admin ? (
           <Switch
             {...label}
             checked={system.status}
@@ -37,7 +37,7 @@ const SystemCard = ({ system, user, onDelete, updateSystemStatus }: Props) => {
         ) : (
           <Switch {...label} disabled checked={system.status} />
         )}
-        <IconButton onClick={onDelete} disabled={!user.status}>
+        <IconButton onClick={onDelete} disabled={user.type === typeUser.user}>
           <TrashIcon
             xmlns="http://www.w3.org/2000/svg"
             className="bi bi-trash3-fill"

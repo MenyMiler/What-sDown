@@ -4,8 +4,8 @@ import { UsersDocument } from './interface.js';
 
 const UsersSchema = new mongoose.Schema<UsersDocument>(
     {
-        status: {
-            type: Boolean,
+        type: {
+            type: String,
             required: true,
         },
         genesisId: {

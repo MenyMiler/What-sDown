@@ -1,4 +1,4 @@
-import type { IShragaUser, ISystem } from "utils/interfaces";
+import { typeUser, type IShragaUser, type ISystem } from "utils/interfaces";
 import { create } from "zustand";
 
 export interface UserState {
@@ -23,7 +23,7 @@ export const useUserStore = create<UserState>((set) => ({
     phoneNumbers: [],
     photo: "",
     identityCard: "",
-    status: false, //if admin
+    type: typeUser.user, //if admin
   },
   setUser: (user) => set({ user }),
 }));

@@ -11,9 +11,9 @@ const genesisId = z.object({
     genesisId: z.string(),
 });
 
-const statuslField = z
+const typeUserField = z
     .object({
-        status: z.boolean(),
+        type: z.enum(['ADMIN', 'USER']),
     })
     .partial();
 
@@ -26,16 +26,10 @@ export const getByQueryRequestSchema = z.object({
             limit: z.coerce.number().optional(),
         })
         .merge(mongoObjectId.partial())
-        .merge(statuslField),
+        .merge(typeUserField),
     params: z.object({}),
 });
 
-// GET /api/users/count
-export const getCountRequestSchema = z.object({
-    body: z.object({}),
-    query: statuslField,
-    params: z.object({}),
-});
 
 // GET /api/users/:id
 export const getByIdRequestSchema = z.object({
@@ -64,14 +58,14 @@ export const getByGenesisIdRequestSchema = z.object({
 
 // POST /api/users
 export const createOneRequestSchema = z.object({
-    body: statuslField.required().merge(genesisId.required()),
+    body: typeUserField.required().merge(genesisId.required()),
     query: z.object({}),
     params: z.object({}),
 });
 
 // PUT /api/users/:id
 export const updateOneRequestSchema = z.object({
-    body: mongoObjectId.partial().merge(statuslField),
+    body: mongoObjectId.partial().merge(typeUserField),
     query: z.object({}),
     params: z.object({
         id: zodMongoObjectId,
@@ -80,7 +74,7 @@ export const updateOneRequestSchema = z.object({
 
 // PUT /api/users/:genesisId
 export const updateOneRequestSchemaByGenesisId = z.object({
-    body: statuslField.required(),
+    body: typeUserField.required(),
     query: z.object({}),
     params: z
         .object({
