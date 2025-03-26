@@ -44,6 +44,18 @@ services:
     networks:
       - app-network
 
+  mock:
+    build:
+      context: ./Mock
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: mock
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
   ui:
     build:
       context: ./ui

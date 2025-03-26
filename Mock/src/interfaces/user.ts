@@ -1,21 +1,46 @@
-export enum UserTypes {
-    SUPERADMIN = 'SUPERADMIN',
-    RESOURCE_MANAGER = 'RESOURCE_MANAGER',
-    PLANNING = 'PLANNING',
-    BASIC_USER = 'BASIC_USER',
-    AUTHORIZED = 'AUTHORIZED',
-    SERGEANT = 'SERGEANT',
-    VISITOR = 'VISITOR',
+/* v8 ignore start */
+
+export enum typeUser {
+    user = "USER",
+    admin = "ADMIN",
 }
 
+
+
+
 export interface User {
-    baseId: String;
-    genesisId: String;
-    type: UserTypes;
+    type: typeUser;
+    genesisId: string;
 }
+
+
 
 export interface UserDocument extends User {
     _id: string;
-    createdAt: Date;
-    updatedAt: Date;
 }
+
+export interface IEntity {
+    akaUnitHierarchy: [];
+    coloredClearance: string;
+    commanderOf: [string];
+    createdAt: string;
+    directGroup: string;
+    displayName: string;
+    entityType: string;
+    firstName: string;
+    fullName: string;
+    hierarchy: string;
+    id: string;
+    identityCard: string;
+    jabberPhone: [];
+    jobTitle: string;
+    lastName: string;
+    mail: string;
+    mobilePhone: [];
+    personalNumber: string;
+    phone: [];
+    updatedAt: string;
+    _id: string;
+    type?:typeUser;
+  }
+
