@@ -11,6 +11,6 @@ export const config = {
     },
     systems: {
         uri: env.get('SYSTEMS_SERVICE_URI').default('http://localhost:8000').asString(),
-        baseRoute: env.get('SYSTEMS_BASE_ROUTE').default('/api/features').asString(),
+        baseRoute: env.get('SYSTEMS_BASE_ROUTE').default('/api/systems').asString(),
     },
 };

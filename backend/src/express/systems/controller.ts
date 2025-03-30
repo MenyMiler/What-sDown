@@ -1,25 +1,25 @@
 import { Response } from 'express';
 import { TypedRequest } from '../../utils/zod';
-import { FeaturesManager } from './manager';
+import { SystemsManager } from './manager';
 
 import { createOneRequestSchema, deleteOneRequestSchema, getByQueryRequestSchema, updateOneRequestSchema } from './validations';
 
-export class FeaturesController {
+export class SystemsController {
     static async getByAll(req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) {
         const { ...query } = req.query;
 
-        res.json(await FeaturesManager.getByQuery(query));
+        res.json(await SystemsManager.getByQuery(query));
     }
 
     static async createOne(req: TypedRequest<typeof createOneRequestSchema>, res: Response) {
-        res.json(await FeaturesManager.createOne(req.body, req.user?.genesisId!));
+        res.json(await SystemsManager.createOne(req.body, req.user?.genesisId!));
     }
 
     static async updateOne(req: TypedRequest<typeof updateOneRequestSchema>, res: Response) {
-        res.json(await FeaturesManager.updateOne(req.params.id, req.body, req.user?.genesisId!));
+        res.json(await SystemsManager.updateOne(req.params.id, req.body, req.user?.genesisId!));
     }
 
     static async deleteOne(req: TypedRequest<typeof deleteOneRequestSchema>, res: Response) {
-        res.json(await FeaturesManager.deleteOne(req.params.id, req.user?.genesisId!));
+        res.json(await SystemsManager.deleteOne(req.params.id, req.user?.genesisId!));
     }
 }

@@ -36,7 +36,7 @@ export function useSystems(
     if (shragaUser?._id) {
       const getSystems = async () => {
         try {
-          const response = await api.get("/api/features");
+          const response = await api.get("/api/systems");
           // setAllSystems(response.data);
           setAllSystems(response.data);
           console.log(response.data);
@@ -60,27 +60,7 @@ export function useGetAllAdmins() {
   }, []);
 }
 
-// export function useSystemStatus(
-//   initialStatus: boolean,
-//   systemId: string,
-//   isAdmin: boolean
-// ) {
-//   const [checked, setChecked] = useState(initialStatus);
 
-//   const toggleStatus = () => {
-//     if (!isAdmin) return;
-//     setChecked((prev) => !prev);
-//   };
-
-//   useEffect(() => {
-//     if (!isAdmin) return;
-//     api
-//       .put(`/api/features/${systemId}`, { status: checked })
-//       .catch(console.error);
-//   }, [checked, systemId]);
-
-//   return { checked, toggleStatus };
-// }
 
 
 

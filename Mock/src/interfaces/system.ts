@@ -1,8 +1,8 @@
-export interface Feature {
+export interface System {
     name: string;
     status: boolean;
 }
 
-export interface FeatureDocument extends Feature {
+export interface SystemDocument extends System {
     _id: string;
 }

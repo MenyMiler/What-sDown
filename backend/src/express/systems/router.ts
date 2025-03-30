@@ -3,24 +3,24 @@ import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import { config } from '../../config';
 import { validateRequest, wrapController } from '../../utils/express/wrappers';
 import { createOneRequestSchema, deleteOneRequestSchema, getByQueryRequestSchema, updateOneRequestSchema } from './validations';
-import { FeaturesController } from './controller';
+import { SystemsController } from './controller';
 
 const {
-    features: { uri },
+    systems: { uri },
     service,
 } = config;
 
-export const featuresRouter = Router();
+export const systemsRouter = Router();
 
-featuresRouter.get(
+systemsRouter.get(
     '/',
     createProxyMiddleware({ target: uri, onProxyReq: fixRequestBody, proxyTimeout: service.requestTimeout }),
     validateRequest(getByQueryRequestSchema),
-    wrapController(FeaturesController.getByAll),
+    wrapController(SystemsController.getByAll),
 );
 
-featuresRouter.post('/', validateRequest(createOneRequestSchema), wrapController(FeaturesController.createOne));
+systemsRouter.post('/', validateRequest(createOneRequestSchema), wrapController(SystemsController.createOne));
 
-featuresRouter.put('/:id', validateRequest(updateOneRequestSchema), wrapController(FeaturesController.updateOne));
+systemsRouter.put('/:id', validateRequest(updateOneRequestSchema), wrapController(SystemsController.updateOne));
 
-featuresRouter.delete('/:id', validateRequest(deleteOneRequestSchema), wrapController(FeaturesController.deleteOne));
+systemsRouter.delete('/:id', validateRequest(deleteOneRequestSchema), wrapController(SystemsController.deleteOne));

@@ -24,7 +24,7 @@ const api = axios.create({
 export async function deleteSystem(systemId: string, type: typeUser) {
   if (type === typeUser.user || !systemId) return;
   try {
-    const response = await api.delete(`/api/features/${systemId}`);
+    const response = await api.delete(`/api/systems/${systemId}`);
     return response;
   } catch (err) {
     console.error(err);
@@ -33,7 +33,7 @@ export async function deleteSystem(systemId: string, type: typeUser) {
 
 export async function getAllSystems() {
   try {
-    const response = await api.get(`/api/features/`);
+    const response = await api.get(`/api/systems/`);
     return response.data;
   } catch (err) {
     console.error(err);
@@ -42,7 +42,7 @@ export async function getAllSystems() {
 
 export const createSystem = async (system: NewSistem) => {
   try {
-    const response = await api.post(`/api/features/`, system);
+    const response = await api.post(`/api/systems/`, system);
     return response;
   } catch (err) {
     console.error(err);
@@ -52,7 +52,7 @@ export const createSystem = async (system: NewSistem) => {
 export const updateSystem = async (system: ISystem, type: typeUser) => {
   if (type === typeUser.user) return;
   try {
-    const response = await api.put(`/api/features/${system._id}`, system);
+    const response = await api.put(`/api/systems/${system._id}`, system);
     return response;
   } catch (err) {
     console.error(err);
