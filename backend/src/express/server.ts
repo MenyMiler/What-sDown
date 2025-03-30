@@ -58,7 +58,6 @@ export class Server {
     }
 
     async start() {
-        // this.http = this.app.listen(this.port, '0.0.0.0');
         this.http = this.app.listen(this.port);
         await once(this.http, 'listening');
     }

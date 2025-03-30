@@ -1,4 +1,3 @@
-
 export interface Feature {
     name: string;
     status: boolean;
@@ -9,6 +8,6 @@ export interface FeatureDocument extends Feature {
 }
 
 export enum typeUser {
-    user = "USER",
-    admin = "ADMIN",
+    user = 'USER',
+    admin = 'ADMIN',
 }

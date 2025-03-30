@@ -16,7 +16,7 @@ export const config = {
         uri: env.get('USERS_SERVICE_URI').default('http://localhost:6050').asString(),
         baseRoute: env.get('USERS_BASE_ROUTE').default('/api/users').asString(),
     },
-    features:{
+    features: {
         uri: env.get('SYSTEMS_SERVICE_URI').default('http://localhost:8000').asString(),
         baseRoute: env.get('SYSTEMS_BASE_ROUTE').default('/api/features').asString(),
     },
@@ -31,6 +31,5 @@ export const config = {
         secret: env.get('SECRET_KEY').default('vision@secret_1234').asString(),
         token: env.get('ACCESS_TOKEN_NAME').required().asString(),
         expiresIn: env.get('ACCESS_TOKEN_EXPIRATION_TIME').default('1d').asString(),
-
     },
 };

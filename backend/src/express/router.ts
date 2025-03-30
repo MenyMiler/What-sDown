@@ -1,4 +1,4 @@
-import {  Router } from 'express';
+import { Router } from 'express';
 import passport from 'passport';
 import { config } from '../config';
 import { authenticationRouter } from './authentication/router';
@@ -9,12 +9,7 @@ export const appRouter = Router();
 
 appRouter.use(['/isAlive', '/isalive', '/health'], (_req, res) => res.status(200).send('alive'));
 
-
-
-
 appRouter.use(config.authentication.baseRoute, authenticationRouter);
-
-
 
 if (config.authentication.isRequired) {
     appRouter.use(passport.authenticate('jwt', { session: false }));
@@ -26,15 +21,8 @@ if (config.authentication.isRequired) {
     });
 }
 
-
-
-
-
 appRouter.use(config.users.baseRoute, usersRouter);
 
-
-
 appRouter.use(config.features.baseRoute, featuresRouter);
-
 
 appRouter.use('*', (_req, res) => res.status(404).send('Invalid Route'));

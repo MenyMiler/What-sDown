@@ -5,7 +5,6 @@ import { FeaturesManager } from './manager';
 import { createOneRequestSchema, deleteOneRequestSchema, getByQueryRequestSchema, updateOneRequestSchema } from './validations';
 
 export class FeaturesController {
-
     static async getByAll(req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) {
         const { ...query } = req.query;
 

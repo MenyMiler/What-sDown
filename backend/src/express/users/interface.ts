@@ -1,10 +1,7 @@
-
 export enum typeUser {
-    user = "USER",
-    admin = "ADMIN",
+    user = 'USER',
+    admin = 'ADMIN',
 }
-
-
 
 export interface User {
     genesisId: string;
