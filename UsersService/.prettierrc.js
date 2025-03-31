@@ -5,7 +5,6 @@ export default {
     printWidth: 150,
     tabWidth: 4,
     endOfLine: 'auto',
-
     overrides: [
         {
             files: '*.json',

@@ -17,10 +17,8 @@ import { IEntity, typeUser, Users, UsersDocument } from './interface.js';
 export class UsersController {
     static getByQuery = async (req: TypedRequest<typeof getByQueryRequestSchema>, res: Response) => {
         const { step, limit, ...query } = req.query;
-
         res.json(await UsersManager.getByQuery(query as Partial<Users>, step, limit));
     };
-
 
     static getById = async (req: TypedRequest<typeof getByIdRequestSchema>, res: Response) => {
         res.json(await UsersManager.getById(req.params.id));
@@ -53,15 +51,15 @@ export class UsersController {
     };
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
-        res.json(await UsersManager.createOne({ ...req.body, type: req.body.type as typeUser}));
+        res.json(await UsersManager.createOne({ ...req.body, type: req.body.type as typeUser }));
     };
 
     static updateOne = async (req: TypedRequest<typeof updateOneRequestSchema>, res: Response) => {
-        res.json(await UsersManager.updateOne(req.params.id, { ...req.body, type: req.body.type as typeUser}));
+        res.json(await UsersManager.updateOne(req.params.id, { ...req.body, type: req.body.type as typeUser }));
     };
 
     static updateOneByGenesisId = async (req: TypedRequest<typeof updateOneRequestSchemaByGenesisId>, res: Response) => {
-        res.json(await UsersManager.updateOneByGenesisId(req.params.genesisId, { ...req.body, type: req.body.type as typeUser}));
+        res.json(await UsersManager.updateOneByGenesisId(req.params.genesisId, { ...req.body, type: req.body.type as typeUser }));
     };
 
     static deleteOne = async (req: TypedRequest<typeof deleteOneRequestSchema>, res: Response) => {

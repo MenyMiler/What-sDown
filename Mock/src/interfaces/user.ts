@@ -1,19 +1,14 @@
 /* v8 ignore start */
 
 export enum typeUser {
-    user = "USER",
-    admin = "ADMIN",
+    user = 'USER',
+    admin = 'ADMIN',
 }
-
-
-
 
 export interface User {
     type: typeUser;
     genesisId: string;
 }
-
-
 
 export interface UserDocument extends User {
     _id: string;
@@ -41,6 +36,5 @@ export interface IEntity {
     phone: [];
     updatedAt: string;
     _id: string;
-    type?:typeUser;
-  }
-
+    type?: typeUser;
+}
