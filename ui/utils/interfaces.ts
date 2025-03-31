@@ -1,12 +1,7 @@
-
-
-
 export enum typeUser {
-    user = "USER",
-    admin = "ADMIN",
+  user = "USER",
+  admin = "ADMIN",
 }
-
-
 
 export interface IShragaUser {
   _id: string;
@@ -49,7 +44,7 @@ export interface IEntity {
   phone: [];
   updatedAt: string;
   _id: string;
-  type?:typeUser;
+  type?: typeUser;
 }
 
 export interface ISystem {

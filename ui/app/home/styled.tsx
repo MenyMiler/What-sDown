@@ -1,7 +1,5 @@
-import { backdropClasses, Button, Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
-
 
 export const HomeCard = styled("div")(() => ({
   height: "100vh",
@@ -12,7 +10,6 @@ export const HomeCard = styled("div")(() => ({
   flexDirection: "column",
 }));
 
-
 export const HomeNav = styled("div")(() => ({
   width: "100%",
   height: "10%",
@@ -20,33 +17,25 @@ export const HomeNav = styled("div")(() => ({
   justifyContent: "space-around",
   alignItems: "center",
   backgroundColor: "#DBDBDB",
-}))
-
-
-
-export const HomeCenter = styled("div")(() => ({
-    width: "80%",
-    height: "90%",
-    minWidth: "300px",
-    border: "1px solid black",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "30px",
-    overflowY: "scroll",
-    paddingTop: "3px",
-    paddingBottom: "3px",
-    "&::-webkit-scrollbar": {
-      display: "none", 
-    },
 }));
 
-
-
-
-
-
+export const HomeCenter = styled("div")(() => ({
+  width: "80%",
+  height: "90%",
+  minWidth: "300px",
+  border: "1px solid black",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexWrap: "wrap",
+  gap: "30px",
+  overflowY: "scroll",
+  paddingTop: "3px",
+  paddingBottom: "3px",
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+}));
 
 export const CardWrapper = styled(Card)(() => ({
   width: "300px",
@@ -54,16 +43,18 @@ export const CardWrapper = styled(Card)(() => ({
   margin: "auto",
 }));
 
-
 export const TrashIcon = styled("svg")(() => ({
   width: "16px",
   height: "16px",
   fill: "currentColor",
 }));
 
-
-export const StyledYesodotIcon = styled("img")({ position: 'absolute', right: 0, height: '3rem', width: '3rem' });
-
+export const StyledYesodotIcon = styled("img")({
+  position: "absolute",
+  right: 0,
+  height: "3rem",
+  width: "3rem",
+});
 
 // העיצוב של המודל שמופיע על המסך
 export const PromptOverlay = styled("div")(() => ({
@@ -80,10 +71,10 @@ export const PromptOverlay = styled("div")(() => ({
 
 export const CustomPrompt = styled("div")(() => ({
   position: "absolute",
-  width: "50%", 
-  height: "50%", 
+  width: "50%",
+  height: "50%",
   minWidth: "305px",
-  backgroundColor: "white", 
+  backgroundColor: "white",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -94,12 +85,11 @@ export const CustomPrompt = styled("div")(() => ({
 export const PromptTitle = styled("h2")(() => ({
   fontSize: "1.5rem",
   width: "100%",
-  height: "10%", 
+  height: "10%",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
 }));
-
 
 export const PromptMessage = styled("div")(() => ({
   width: "100%",
@@ -107,9 +97,9 @@ export const PromptMessage = styled("div")(() => ({
   overflowY: "scroll",
   padding: "10px",
   "&::-webkit-scrollbar": {
-    display: "none", 
+    display: "none",
   },
-  display: "flex",  
+  display: "flex",
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
@@ -122,12 +112,7 @@ export const AdminCardStyled = styled("div")(() => ({
   border: "1px solid gray",
   direction: "rtl",
   padding: "10px",
-}))
-
-
-
-
-
+}));
 
 export const PlusButton = styled(Button)(() => ({
   position: "absolute",
@@ -149,7 +134,6 @@ export const PlusButton = styled(Button)(() => ({
   },
 }));
 
-
 export const CloseButton = styled(Button)(() => ({
   position: "absolute",
   top: "0%",
@@ -169,7 +153,6 @@ export const CloseButton = styled(Button)(() => ({
     backgroundColor: "#ff0000",
   },
 }));
-
 
 export const FlexDirectionColumn = styled("div")(() => ({
   width: "100%",

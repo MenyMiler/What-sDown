@@ -1,14 +1,8 @@
 import i18next from "i18next";
 import { ToastContainer, toast } from "react-toastify";
 
-// Default
-// info
-// success
-// warning
-// error
-
 export function AboutContent() {
-  console.log(i18next.t("toast_messages.test"))
+  console.log(i18next.t("toast_messages.test"));
   const Default = () => toast(i18next.t("toast_messages.test"));
   const info = () => toast.info("info!");
   const success = () => toast.success("success!");

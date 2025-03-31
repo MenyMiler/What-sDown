@@ -1,5 +1,10 @@
-import axios from "axios";
-import { typeUser, type IEntity, type IShragaUser, type ISystem, type NewSistem } from "./interfaces";
+import {
+  typeUser,
+  type IEntity,
+  type ISystem,
+  type NewSistem,
+} from "./interfaces";
+import { api } from "./axios";
 
 export function getCookie(name: string): string | null {
   const cookies = document.cookie.split("; ");
@@ -11,15 +16,6 @@ export function getCookie(name: string): string | null {
   }
   return null;
 }
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_BASE_ROUTE,
-
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
-});
 
 export async function deleteSystem(systemId: string, type: typeUser) {
   if (type === typeUser.user || !systemId) return;
@@ -80,18 +76,20 @@ export const getAllAdmins = async () => {
   }
 };
 
-
-
-export const fetchEntities = async (page: number = 1, pageSize: number = 10): Promise<any[]> => {
+export const fetchEntities = async (
+  page: number = 1,
+  pageSize: number = 10
+): Promise<any[]> => {
   try {
-    const response = await api.get(`/api/users/notAdmins?page=${page}&pageSize=${pageSize}`);
+    const response = await api.get(
+      `/api/users/notAdmins?page=${page}&pageSize=${pageSize}`
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to fetch entities:", error);
     return [];
   }
-}
-
+};
 
 export const saveNewAdmin = async (user: IEntity) => {
   try {
